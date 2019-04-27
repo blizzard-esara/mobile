@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:fontFamily="@font/shylock_nbp"
+        android:textColor="#081d39"
+        android:text="Welcome"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#fff">
+
+        <LinearLayout
+            android:id="@+id/idLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:layout_gravity="center"
+                android:text="ID :"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/idTxt"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:maxLength="20"
+                android:fontFamily="@font/pfstardust"
+                android:hint="ID를 입력하세요."/>
+
+                <TextView
+                    android:id="@+id/idCheckTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/pfstardust"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/checkIdBtn"
+                android:layout_marginLeft="20dp"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:fontFamily="@font/pfstardust"
+                android:textColor="#081d39"
+                android:text="중복확인"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pwLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idLinear"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="PW :"/>
+
+            <EditText
+                android:id="@+id/pwTxt"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:gravity="center"
+                android:fontFamily="@font/pfstardust"
+                android:textSize="15sp"
+                android:hint="PW를 입력하세요."/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/pwCheckLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pwLinear"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:gravity="center"
+                android:text="Re PW :"/>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/pwCheckTxt"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:inputType="textPassword"
+                    android:gravity="center"
+                    android:fontFamily="@font/pfstardust"
+                    android:textSize="15sp"
+                    android:hint="PW를 한번더 입력하세요."/>
+
+                <TextView
+                    android:id="@+id/pwCheckTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/pfstardust"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emailLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pwCheckLinear"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:gravity="center"
+                android:text="Email :"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/emailTxt"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/shylock_nbp"
+                    android:gravity="center"
+                    android:maxLength="30"
+                    android:textSize="12sp"
+                    android:hint="Email을 입력하세요."/>
+
+                <TextView
+                    android:id="@+id/emailCheckTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pfstardust"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phoneLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailLinear"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="Phone :"/>
+
+            <EditText
+                android:id="@+id/phone_1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:fontFamily="@font/shylock_nbp"
+                android:gravity="center"
+                android:maxLength="3"
+                android:text="010"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="15sp"
+                android:text=" - "/>
+
+            <EditText
+                android:id="@+id/phone_2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4"
+                android:fontFamily="@font/shylock_nbp"
+                android:gravity="center"
+                android:hint="0000"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="@font/shylock_nbp"
+                android:text=" - "/>
+
+            <EditText
+                android:id="@+id/phone_3"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4"
+                android:gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:hint="0000"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/genderLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phoneLinear"
+            android:layout_marginTop="15dp">
+
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:fontFamily="@font/shylock_nbp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Age :"/>
+
+            <EditText
+                android:id="@+id/ageTxt"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="22"
+                android:fontFamily="@font/shylock_nbp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginRight="15dp"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:fontFamily="@font/shylock_nbp"
+                android:layout_gravity="center"
+                android:text="Gender :"/>
+
+
+            <RadioGroup
+                android:id="@+id/genderRadioBtn"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/radioManBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/shylock_nbp"
+                    android:text="man"/>
+                <RadioButton
+                    android:id="@+id/wradioWomanBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/shylock_nbp"
+                    android:text="woman"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subscriptionLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/buttonLinear"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#081d39"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:fontFamily="@font/pfstardust"
+                android:text="위 이메일로 최신소식 구독을 동의합니다."/>
+
+            <CheckBox
+                android:id="@+id/subscriptionCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_frame"
+                android:textColor="#081d39"
+                android:layout_marginRight="50dp"
+                android:fontFamily="@font/pfstardust"
+                android:text="이전으로"/>
+
+            <Button
+                android:id="@+id/signUpSubmitBtn"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_frame"
+                android:textColor="#081d39"
+                android:fontFamily="@font/pfstardust"
+                android:text="가입완료"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
