@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/mainAdventure"
+            android:icon="@drawable/tmpicon"
+            android:title="모험하기" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/monsterCollection"
+            android:icon="@drawable/tmpicon"
+            android:title="도감"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/friends"
+            android:icon="@drawable/tmpicon"
+            android:title="친구목록" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/explanation"
+            android:icon="@drawable/tmpicon"
+            android:title="연구소" />
+        <item
+            android:id="@+id/changeEgg"
+            android:icon="@drawable/tmpicon"
+            android:title="알 변경"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="QUIZE">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/starCraftQuestion"
+                android:icon="@mipmap/icon_min_starcraft"
+                android:title="Star Craft" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/overWatchQuize"
+                android:icon="@mipmap/icon_min_overwatch"
+                android:title="Over Watch" />
+            <item
+                android:id="@+id/diabloQuestion"
+                android:icon="@mipmap/icon_min_diablo"
+                android:title="Diablo" />
         </menu>
     </item>
+
+
 
 </menu>

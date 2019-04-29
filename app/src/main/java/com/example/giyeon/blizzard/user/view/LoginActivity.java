@@ -48,11 +48,18 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "ID와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     if(UserController.getInstance().checkLogin(idTxt.getText().toString(), pwTxt.getText().toString())) {
-                        if((UserController.getInstance().initalCheck(UserData.getInstance().getId()))) {
+                        int checkHasMonster = UserController.getInstance().initalCheck(UserData.getInstance().getId());
+                        if(checkHasMonster == -1) {
                             //처음 사용자일때
                             startActivity(new Intent(LoginActivity.this ,InitalActivity.class));
-                        } else {
+                        } else if(checkHasMonster == 1) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, MonsterChoiseActivity.class);
+
+
+                            startActivity(new Intent(LoginActivity.this, MonsterChoiseActivity.class).putExtra("layout","login"));
                         }
 
                             finish();

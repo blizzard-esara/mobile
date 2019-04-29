@@ -4,7 +4,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,50 +21,55 @@ import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.UserController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
+import com.example.giyeon.blizzard.user.custom.StoryHandler;
+import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
 public class InitalActivity extends AppCompatActivity {
 
     private Context context;
-
-    TextView storyText;
-    ImageView initEgg;
-    ImageView starEgg;
-    ImageView overwatchEgg;
-    ImageView diabloEgg;
-
-
-    ImageView eggSpeachImageView;
-    TextView eggSpeachTv;
-
-    ImageView storyImageFrame;
-
-    AnimatorSet eggAnimator1;
-    AnimatorSet eggAnimator2;
-    AnimatorSet eggAnimator3;
-    AnimatorSet eggAnimatorReset;
-
-    Button startGameBtn;
-
-    Animation removeAnimation;
     private CustomDialog customDialog;
 
+
+    private TextView storyText;
+    private ImageView initEgg;
+    private ImageView starEgg;
+    private ImageView overwatchEgg;
+    private ImageView diabloEgg;
+
+
+    private ImageView eggSpeachImageView;
+    private TextView eggSpeachTv;
+
+    private ImageView storyImageFrame;
+
+    private AnimatorSet eggAnimator1;
+    private AnimatorSet eggAnimator2;
+    private AnimatorSet eggAnimator3;
+    private AnimatorSet eggAnimatorReset;
+
+    private Button startGameBtn;
+
+    private Animation removeAnimation;
+
+
     StoryHandler handler;
+
     String story = "";
-    char w;
     String eggChar = "";
 
-
+    char w;
 
     private boolean checkAnimator = false;
 
     final String word = "안녕하세요. YSERA TEAM에 온 걸 환영합니다. "+
-    "이곳은 정보를 이용해 소통하고 성장하는 세계입니다. "+
-    "알들에게 정보를 주고 알들을 성장시켜 주세요.          \n\n"+
-    "자, 당신의 첫 번째 알을 선택할 차례입니다.";
+                        "이곳은 정보를 이용해 소통하고 성장하는 세계입니다. "+
+                        "알들에게 정보를 주고 알들을 성장시켜 주세요.          \n\n"+
+                        "자, 당신의 첫 번째 알을 선택할 차례입니다.";
+
     final String eggMent = "나를 선택해줘서 고마워!          \n 잘 키워줘!";
 
-    Thread stroyThread;
+    //Thread stroyThread;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,14 +88,16 @@ public class InitalActivity extends AppCompatActivity {
         diabloEgg = (ImageView) findViewById(R.id.diabloEgg);
 
         eggSpeachImageView = (ImageView)findViewById(R.id.eggSpeachImageView);
-        eggSpeachTv = (TextView)findViewById(R.id.eggSpeachTv);
         storyImageFrame = (ImageView)findViewById(R.id.storyImageFrame);
+
+
+        eggSpeachTv = (TextView)findViewById(R.id.eggSpeachTv);
 
         startGameBtn = (Button)findViewById(R.id.startGameBtn);
 
-        eggAnimator1 = setAnimator(starEgg,0, 250);
-        eggAnimator2 = setAnimator(overwatchEgg,270, -250);
-        eggAnimator3 = setAnimator(diabloEgg,-270, -250);
+        eggAnimator1 = setAnimator(starEgg,0.7f,0, 250);
+        eggAnimator2 = setAnimator(overwatchEgg,0.7f,270, -250);
+        eggAnimator3 = setAnimator(diabloEgg,0.7f,-270, -250);
 
 
 
@@ -130,7 +136,7 @@ public class InitalActivity extends AppCompatActivity {
 
         handler = new StoryHandler(storyText, word);
 
-        stroyThread = new Thread(new Runnable() {
+        Thread stroyThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 for(int i =0 ; i< word.length() ; i++) {
@@ -166,17 +172,16 @@ public class InitalActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.starcraftEgg :
                 eggChar = "starCraft";
-                eggAnimatorReset = returnAnimator(starEgg);
+                eggAnimatorReset = setAnimator(starEgg, 1.0f, 0, 0);
                 break;
 
             case R.id.overWatchEgg :
                 eggChar = "overWatch";
-                eggAnimatorReset = returnAnimator(overwatchEgg);
+                eggAnimatorReset = setAnimator(overwatchEgg, 1.0f, 0, 0);
                 break;
             case  R.id.diabloEgg :
-
-                eggAnimatorReset = returnAnimator(diabloEgg);
                 eggChar = "diablo";
+                eggAnimatorReset = setAnimator(diabloEgg, 1.0f, 0, 0);
                 break;
         }
 
@@ -199,10 +204,12 @@ public class InitalActivity extends AppCompatActivity {
                             case "diablo" : removeEgg(starEgg, overwatchEgg); break;
                         }
 
+                        MonsterData.getInstance().setExp(0);
+                        MonsterData.getInstance().setLevel(1);
+                        MonsterData.getInstance().setMainMonster(eggChar);
+
 
                         handler = new StoryHandler(eggSpeachTv, eggMent);
-
-
 
 
                         storyText.setText("");
@@ -255,12 +262,9 @@ public class InitalActivity extends AppCompatActivity {
                                 });
                             }
                         }, 5000);
-
-
-
-
                     }
                 });
+
         customDialog.show();
 
 
@@ -287,6 +291,7 @@ public class InitalActivity extends AppCompatActivity {
             }
         }, 3000);
     }
+
     private void removeEgg(ImageView obj1, ImageView obj2) {
         obj1.setAnimation(removeAnimation);
         obj2.setAnimation(removeAnimation);
@@ -300,24 +305,9 @@ public class InitalActivity extends AppCompatActivity {
         animatorSet.cancel();
     }
 
-    private AnimatorSet returnAnimator(ImageView obj) {
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(obj, "scaleX", 1.0f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(obj, "scaleY", 1.0f);
-        ObjectAnimator alpha = ObjectAnimator.ofFloat(obj, "alpha", 0.0f, 1f);
-        ObjectAnimator translationX = ObjectAnimator.ofFloat(obj, "translationX", 0);
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(obj, "translationY", 0);
-
-        AnimatorSet animatorSet = new AnimatorSet();
-
-        animatorSet.playTogether(scaleX, scaleY, alpha, translationX, translationY);
-        animatorSet.setDuration(2500);
-
-        return animatorSet;
-    }
-
-    private AnimatorSet setAnimator(ImageView obj, int transX, int transY) {
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(obj, "scaleX", 0.7f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(obj, "scaleY", 0.7f);
+    private AnimatorSet setAnimator(ImageView obj, float sizeXY, int transX, int transY) {
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(obj, "scaleX", sizeXY);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(obj, "scaleY", sizeXY);
         ObjectAnimator alpha = ObjectAnimator.ofFloat(obj, "alpha", 0.0f, 1f);
         ObjectAnimator translationX = ObjectAnimator.ofFloat(obj, "translationX", transX);
         ObjectAnimator translationY = ObjectAnimator.ofFloat(obj, "translationY", transY);
@@ -331,24 +321,6 @@ public class InitalActivity extends AppCompatActivity {
     }
 
 
-    class StoryHandler extends Handler {
-        TextView textView;
-        String w;
-
-        public StoryHandler(TextView textView, String w) {
-            this.textView = textView;
-            this.w = w;
-            story = "";
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            story += w.charAt(msg.arg1);
-            textView.setText(story);
-        }
-    }
 }
 
 
