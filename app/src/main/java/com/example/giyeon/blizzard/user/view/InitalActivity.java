@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,9 +18,9 @@ import android.widget.TextView;
 
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
+import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.controller.UserController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
-import com.example.giyeon.blizzard.user.custom.StoryHandler;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
@@ -53,9 +52,9 @@ public class InitalActivity extends AppCompatActivity {
     private Animation removeAnimation;
 
 
-    StoryHandler handler;
+    Handler h;
+    final int delay = 2500;
 
-    String story = "";
     String eggChar = "";
 
     char w;
@@ -69,7 +68,7 @@ public class InitalActivity extends AppCompatActivity {
 
     final String eggMent = "나를 선택해줘서 고마워!          \n 잘 키워줘!";
 
-    //Thread stroyThread;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,6 +76,7 @@ public class InitalActivity extends AppCompatActivity {
         setContentView(R.layout.inital_user);
 
         context = this;
+        h = new Handler();
 
 
         storyText = (TextView)findViewById(R.id.storyText);
@@ -95,9 +95,9 @@ public class InitalActivity extends AppCompatActivity {
 
         startGameBtn = (Button)findViewById(R.id.startGameBtn);
 
-        eggAnimator1 = setAnimator(starEgg,0.7f,0, 250);
-        eggAnimator2 = setAnimator(overwatchEgg,0.7f,270, -250);
-        eggAnimator3 = setAnimator(diabloEgg,0.7f,-270, -250);
+        eggAnimator1 = CommonController.getInstance().setAnimator(starEgg,0.7f,0, 250, delay);
+        eggAnimator2 = CommonController.getInstance().setAnimator(overwatchEgg,0.7f,270, -250, delay);
+        eggAnimator3 = CommonController.getInstance().setAnimator(diabloEgg,0.7f,-270, -250, delay);
 
 
 
@@ -134,27 +134,9 @@ public class InitalActivity extends AppCompatActivity {
         });
 */
 
-        handler = new StoryHandler(storyText, word);
+        CommonController.getInstance().threadStart(storyText, word);
 
-        Thread stroyThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i =0 ; i< word.length() ; i++) {
-                    try {
-                        Thread.sleep(100);
-                        Message msg = handler.obtainMessage(i);
-                        msg.arg1 = i;
-                        handler.sendMessage(msg);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        stroyThread.start();
-
-        Handler h = new Handler();
-        handler.postDelayed(new Runnable() {
+        h.postDelayed(new Runnable() {
             @Override
             public void run() {
                seperateEgg();
@@ -172,16 +154,16 @@ public class InitalActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.starcraftEgg :
                 eggChar = "starCraft";
-                eggAnimatorReset = setAnimator(starEgg, 1.0f, 0, 0);
+                eggAnimatorReset = CommonController.getInstance().setAnimator(starEgg, 1.0f, 0, 0, delay);
                 break;
 
             case R.id.overWatchEgg :
                 eggChar = "overWatch";
-                eggAnimatorReset = setAnimator(overwatchEgg, 1.0f, 0, 0);
+                eggAnimatorReset = CommonController.getInstance().setAnimator(overwatchEgg, 1.0f, 0, 0, delay);
                 break;
             case  R.id.diabloEgg :
                 eggChar = "diablo";
-                eggAnimatorReset = setAnimator(diabloEgg, 1.0f, 0, 0);
+                eggAnimatorReset = CommonController.getInstance().setAnimator(diabloEgg, 1.0f, 0, 0, delay);
                 break;
         }
 
@@ -198,10 +180,11 @@ public class InitalActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         customDialog.dismiss();
                         eggAnimatorReset.start();
+                        CommonController.getInstance().setRemoveAnimation(context, R.anim.remove);
                         switch (eggChar) {
-                            case "starCraft" : removeEgg(overwatchEgg, diabloEgg); break;
-                            case "overWatch" : removeEgg(starEgg, diabloEgg); break;
-                            case "diablo" : removeEgg(starEgg, overwatchEgg); break;
+                            case "starCraft" : CommonController.getInstance().removeEgg(overwatchEgg, diabloEgg); break;
+                            case "overWatch" : CommonController.getInstance().removeEgg(starEgg, diabloEgg); break;
+                            case "diablo" : CommonController.getInstance().removeEgg(starEgg, overwatchEgg); break;
                         }
 
                         MonsterData.getInstance().setExp(0);
@@ -209,14 +192,12 @@ public class InitalActivity extends AppCompatActivity {
                         MonsterData.getInstance().setMainMonster(eggChar);
 
 
-                        handler = new StoryHandler(eggSpeachTv, eggMent);
-
 
                         storyText.setText("");
                         storyImageFrame.setVisibility(View.GONE);
 
-                        Handler h = new Handler();
-                        handler.postDelayed(new Runnable() {
+
+                        h.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 eggSpeachImageView.setVisibility(View.VISIBLE);
@@ -224,30 +205,13 @@ public class InitalActivity extends AppCompatActivity {
                                 starEgg.setOnClickListener(null);
                                 overwatchEgg.setOnClickListener(null);
 
-                                Thread t = new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        for(int i =0 ; i< eggMent.length() ; i++) {
-                                            try {
-                                                Thread.sleep(100);
-                                                Message msg = handler.obtainMessage(i);
-                                                msg.arg1 = i;
-                                                handler.sendMessage(msg);
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                        //Out Text
-                                    }
-
-                                });
-                                t.start();
+                                CommonController.getInstance().threadStart(eggSpeachTv, eggMent);
                             }
                         }, 3000);
 
 
 
-                        handler.postDelayed(new Runnable() {
+                        h.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 startGameBtn.setVisibility(View.VISIBLE);
@@ -292,33 +256,13 @@ public class InitalActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void removeEgg(ImageView obj1, ImageView obj2) {
-        obj1.setAnimation(removeAnimation);
-        obj2.setAnimation(removeAnimation);
-        obj1.setVisibility(View.GONE);
-        obj2.setVisibility(View.GONE);
-    }
-
     private void initAnimator(AnimatorSet animatorSet) {
         animatorSet.removeAllListeners();
         animatorSet.end();
         animatorSet.cancel();
     }
 
-    private AnimatorSet setAnimator(ImageView obj, float sizeXY, int transX, int transY) {
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(obj, "scaleX", sizeXY);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(obj, "scaleY", sizeXY);
-        ObjectAnimator alpha = ObjectAnimator.ofFloat(obj, "alpha", 0.0f, 1f);
-        ObjectAnimator translationX = ObjectAnimator.ofFloat(obj, "translationX", transX);
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(obj, "translationY", transY);
 
-        AnimatorSet animatorSet = new AnimatorSet();
-
-        animatorSet.playTogether(scaleX, scaleY, alpha, translationX, translationY);
-        animatorSet.setDuration(2500);
-
-        return animatorSet;
-    }
 
 
 }

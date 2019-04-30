@@ -180,7 +180,6 @@ public class UserController {
             e.printStackTrace();
         }
 
-
         return result;
     }
 }

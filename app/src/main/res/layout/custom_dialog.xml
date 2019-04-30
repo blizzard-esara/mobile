@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="300dip"
-        android:layout_height="200dip"
+        android:layout_height="210dip"
         android:background="@drawable/alert"
         android:orientation="vertical" >
 
@@ -31,9 +31,9 @@
             android:fontFamily="@font/pfstardust"
             android:textColor="@android:color/black"
             android:text="정말로 이 알을 고르시겠습니까?"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -44,19 +44,33 @@
                 android:id="@+id/btn_left"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="35dp"
                 android:fontFamily="@font/pfstardust"
                 android:background="@drawable/button_frame"
                 android:text="아니오" />
+
+            <Button
+                android:id="@+id/btn_center"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/pfstardust"
+                android:background="@drawable/button_frame"
+                android:text="확인"/>
 
             <Button
                 android:id="@+id/btn_right"
                 android:layout_marginLeft="20dp"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
                 android:fontFamily="@font/pfstardust"
                 android:background="@drawable/button_frame"
                 android:text="예" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

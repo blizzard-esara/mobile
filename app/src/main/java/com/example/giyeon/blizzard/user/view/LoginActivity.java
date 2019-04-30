@@ -15,6 +15,7 @@ import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.controller.UserController;
+import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
 public class LoginActivity extends AppCompatActivity {
@@ -53,12 +54,14 @@ public class LoginActivity extends AppCompatActivity {
                             //처음 사용자일때
                             startActivity(new Intent(LoginActivity.this ,InitalActivity.class));
                         } else if(checkHasMonster == 1) {
+                            MonsterData.getInstance().setExp(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("exp").toString()));
+                            MonsterData.getInstance().setLevel(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("level").toString()));
+                            MonsterData.getInstance().setMainMonster(MonsterData.getInstance().getMonsterList().get(0).get("monster").toString());
+                            MonsterData.getInstance().setMonsterUrl(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), MonsterData.getInstance().getMainMonster()));
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                         } else {
                             Intent intent = new Intent(LoginActivity.this, MonsterChoiseActivity.class);
-
-
                             startActivity(new Intent(LoginActivity.this, MonsterChoiseActivity.class).putExtra("layout","login"));
                         }
 

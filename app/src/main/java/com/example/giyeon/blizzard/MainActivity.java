@@ -32,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.controller.UserController;
+import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
@@ -51,7 +52,15 @@ public class MainActivity extends AppCompatActivity
     RatingBar ratingBar;
     ImageView userMonster;
 
+    View navHeaderView;
+    CustomDialog customDialog;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setNavHeader();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +152,19 @@ public class MainActivity extends AppCompatActivity
         } else if( id == R.id.explanation) {
 
         } else if( id == R.id.changeEgg) {
-            startActivity(new Intent(MainActivity.this, MonsterChoiseActivity.class).putExtra("layout","main"));
+            if(MonsterData.getInstance().getMonsterList().size() == 1) {
+                customDialog = new CustomDialog(context, "! 경고", "몬스터가 한마리밖에 없습니다.\n몬스터를 추가해주세요.",
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                customDialog.dismiss();
+                            }
+                        });
+
+                customDialog.show();
+            } else {
+                startActivity(new Intent(MainActivity.this, MonsterChoiseActivity.class).putExtra("layout","main"));
+            }
         } else if( id == R.id.starCraftQuestion) {
 
         } else if(id == R.id.overWatchQuize) {
@@ -196,7 +217,7 @@ public class MainActivity extends AppCompatActivity
             applyFontToMenuItem(mi, true);
         }
         navigationView.setNavigationItemSelectedListener(this);
-        View navHeaderView = navigationView.getHeaderView(0);
+        navHeaderView = navigationView.getHeaderView(0);
 
 
 
@@ -204,10 +225,13 @@ public class MainActivity extends AppCompatActivity
         TextView userIdHeadView = (TextView)navHeaderView.findViewById(R.id.userIdHeadView);
         ratingBar = (RatingBar)navHeaderView.findViewById(R.id.expRating);
         userIdHeadView.setText(UserData.getInstance().getId()+"님 환영합니다.");
+
+    }
+    private void setNavHeader() {
         ratingBar.setRating(MonsterData.getInstance().getLevel());
         //userMonster.setImageResource(R.drawable.diablo_egg);
 
-         Glide.with(navHeaderView).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "diablo")
+        Glide.with(navHeaderView).load(MonsterData.getInstance().getMonsterUrl()
                 //"http://10.0.2.2/blizzard/eggImage/overWatch1.png"
         ).apply(new RequestOptions().circleCrop()).into(userMonster);
 
