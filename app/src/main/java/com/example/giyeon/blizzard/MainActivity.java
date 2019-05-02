@@ -9,7 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -25,8 +27,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -34,9 +38,19 @@ import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.controller.UserController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
+import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 import com.example.giyeon.blizzard.user.view.MonsterChoiseActivity;
+import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
+import com.example.giyeon.blizzard.user.view.frag.FragFragEgg1;
+import com.example.giyeon.blizzard.user.view.frag.FragFragEgg2;
+import com.example.giyeon.blizzard.user.view.frag.FragFragEgg3;
+import com.example.giyeon.blizzard.user.view.frag.MainAdvantureFragment;
+import com.example.giyeon.blizzard.user.view.frag.MainFragment;
+import com.example.giyeon.blizzard.user.view.frag.OverwatchQuesFragment;
+import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
+import com.example.giyeon.blizzard.user.view.frag.StarcraftQuesFragment;
 
 import org.w3c.dom.Text;
 
@@ -49,17 +63,19 @@ public class MainActivity extends AppCompatActivity
 
     Context context;
     /** Header Menu **/
-    RatingBar ratingBar;
-    ImageView userMonster;
+    LinearLayout navHeaderContainer;
 
     View navHeaderView;
     CustomDialog customDialog;
+
+    /** Fragment Setting**/
+    FragmentManager manager;
+
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        setNavHeader();
     }
 
     @Override
@@ -72,14 +88,6 @@ public class MainActivity extends AppCompatActivity
         setTitle("");
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,8 +100,14 @@ public class MainActivity extends AppCompatActivity
 
         //myMethod
         setStatusBar();
-        setFont();
+        CommonController.getInstance().setFont();
         setBGM();
+
+        //fragment Setting
+        manager = setManager();
+
+        MainFragment.getInstance().setContext(context);
+        manager.beginTransaction().replace(R.id.content_main, MainFragment.getInstance()).commit();
 
     }
 
@@ -143,35 +157,42 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.mainAdventure){
-            // Handle the camera action
-        } else if (id == R.id.monsterCollection) {
+            MainAdvantureFragment.getInstance().setContext(context);
+            manager.beginTransaction().replace(R.id.content_main, MainAdvantureFragment.getInstance()).commit();
 
-        } else if (id == R.id.friends) {
-
+        } else if (id == R.id.userInfo) {
+            Toast.makeText(context, " friens fragment 미구현", Toast.LENGTH_SHORT).show(); // must modification
         } else if( id == R.id.explanation) {
+            ExplanationFragment.getInstance().setContext(context);
+            manager.beginTransaction().replace(R.id.content_main, ExplanationFragment.getInstance()).commit();
+        } else if( id == R.id.shop) {
+            manager.beginTransaction().replace(R.id.content_main, ShopFragment.getInstance()).commit();
+        }
+        /*
+        else if( id == R.id.starCraftQuize) {
 
-        } else if( id == R.id.changeEgg) {
-            if(MonsterData.getInstance().getMonsterList().size() == 1) {
-                customDialog = new CustomDialog(context, "! 경고", "몬스터가 한마리밖에 없습니다.\n몬스터를 추가해주세요.",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                customDialog.dismiss();
-                            }
-                        });
-
-                customDialog.show();
-            } else {
-                startActivity(new Intent(MainActivity.this, MonsterChoiseActivity.class).putExtra("layout","main"));
-            }
-        } else if( id == R.id.starCraftQuestion) {
+            StarcraftQuesFragment.getInstance().setContext(context);
+            manager.beginTransaction().replace(R.id.content_main, StarcraftQuesFragment.getInstance()).commit();
 
         } else if(id == R.id.overWatchQuize) {
 
-        } else if(id == R.id. diabloQuestion) {
+            OverwatchQuesFragment.getInstance().setContext(context);
+            manager.beginTransaction().replace(R.id.content_main, OverwatchQuesFragment.getInstance()).commit();
 
+        } else if(id == R.id.diabloQuize) {
+            customDialog = new CustomDialog(context, "! 준비중", "준비중인 컨텐츠 입니다.",
+                    new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            customDialog.dismiss();
+                        }
+                    });
+            customDialog.show();
         }
+        */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -219,31 +240,23 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navHeaderView = navigationView.getHeaderView(0);
 
+        navHeaderContainer = (LinearLayout)navHeaderView.findViewById(R.id.navigation_header_container);
+
+        navHeaderContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.beginTransaction().replace(R.id.content_main, MainFragment.getInstance()).commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
 
 
-        userMonster = (ImageView)navHeaderView.findViewById(R.id.userMonster);
-        TextView userIdHeadView = (TextView)navHeaderView.findViewById(R.id.userIdHeadView);
-        ratingBar = (RatingBar)navHeaderView.findViewById(R.id.expRating);
-        userIdHeadView.setText(UserData.getInstance().getId()+"님 환영합니다.");
-
-    }
-    private void setNavHeader() {
-        ratingBar.setRating(MonsterData.getInstance().getLevel());
-        //userMonster.setImageResource(R.drawable.diablo_egg);
-
-        Glide.with(navHeaderView).load(MonsterData.getInstance().getMonsterUrl()
-                //"http://10.0.2.2/blizzard/eggImage/overWatch1.png"
-        ).apply(new RequestOptions().circleCrop()).into(userMonster);
 
     }
 
-    private void setFont() {
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("font/shylock_nbp.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-    }
+
+
     private void applyFontToMenuItem(MenuItem mi, boolean ko) {
         Typeface font;
         if(ko) {
@@ -257,4 +270,7 @@ public class MainActivity extends AppCompatActivity
         mi.setTitle(mNewTitle);
     }
 
+
+
 }
+
