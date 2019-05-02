@@ -20,7 +20,7 @@
             android:title="친구목록" />
         <item
             android:id="@+id/explanation"
-            android:icon="@drawable/tmpicon"
+            android:icon="@mipmap/dictionary_mip_icon"
             android:title="연구소" />
         <item
             android:id="@+id/changeEgg"
@@ -31,7 +31,7 @@
     <item android:title="QUIZE">
         <menu>
             <item
-                android:id="@+id/starCraftQuestion"
+                android:id="@+id/starCraftQuize"
                 android:icon="@mipmap/icon_min_starcraft"
                 android:title="Star Craft" />
             <item
@@ -39,7 +39,7 @@
                 android:icon="@mipmap/icon_min_overwatch"
                 android:title="Over Watch" />
             <item
-                android:id="@+id/diabloQuestion"
+                android:id="@+id/diabloQuize"
                 android:icon="@mipmap/icon_min_diablo"
                 android:title="Diablo" />
         </menu>

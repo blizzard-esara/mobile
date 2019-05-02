@@ -123,6 +123,14 @@ public class UserController {
                     List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
                     MonsterData.getInstance().setMonsterList(monsterList);
 
+                    for(int i = 0 ; i < monsterList.size() ; i++) {
+                        monsterList.get(i).put("url",mainMonsterImageURL(
+                                                                        UserData.getInstance().getId(),
+                                                                        MonsterData.getInstance().getMonsterList().get(i).get("monster").toString()
+                        ));
+                    }
+
+
                     returnInt = monsterList.size();
                     JSONArray jsonArray = new JSONArray(result);
 
