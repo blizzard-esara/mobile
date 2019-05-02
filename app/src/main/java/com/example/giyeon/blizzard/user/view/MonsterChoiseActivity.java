@@ -113,16 +113,16 @@ public class MonsterChoiseActivity extends AppCompatActivity {
                 break;
             }
         }
-
+        diabloEgg.setOnClickListener(null);
+        starEgg.setOnClickListener(null);
+        overwatchEgg.setOnClickListener(null);
         eggAnimatorReset.start();
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 eggSpeachImageView.setVisibility(View.VISIBLE);
-                diabloEgg.setOnClickListener(null);
-                starEgg.setOnClickListener(null);
-                overwatchEgg.setOnClickListener(null);
+
 
                 CommonController.getInstance().threadStart(eggSpeachTv, eggMent);
             }
@@ -146,23 +146,27 @@ public class MonsterChoiseActivity extends AppCompatActivity {
 
 
     private void showEggList(int cnt) {
+        for(int i = 0 ; i < cnt ; i++) {
+            listArr.add(String.valueOf(MonsterData.getInstance().getMonsterList().get(i).get("monster")));
+        }
+
         switch (cnt) {
             case 2:
                 if(!listArr.contains("diablo")) { // diablo가 없을때
 
-                    Glide.with(context).load(R.drawable.egg_lock).into(diabloEgg);
+                    Glide.with(context).load(R.drawable.egg_lock2).into(diabloEgg);
                     diabloEgg.setOnClickListener(null);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "starCraft")).into(starEgg);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "overWatch")).into(overwatchEgg);
 
                 } else if(!listArr.contains("overWatch")) {
-                    Glide.with(context).load(R.drawable.egg_lock).into(overwatchEgg);
+                    Glide.with(context).load(R.drawable.egg_lock2).into(overwatchEgg);
                     overwatchEgg.setOnClickListener(null);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "starCraft")).into(starEgg);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "diablo")).into(diabloEgg);
 
                 } else if(!listArr.contains("starCraft")) {
-                    Glide.with(context).load(R.drawable.egg_lock).into(starEgg);
+                    Glide.with(context).load(R.drawable.egg_lock2).into(starEgg);
                     starEgg.setOnClickListener(null);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "overWatch")).into(overwatchEgg);
                     Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "diablo")).into(diabloEgg);
@@ -175,9 +179,7 @@ public class MonsterChoiseActivity extends AppCompatActivity {
                 Glide.with(context).load(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), "diablo")).into(diabloEgg);
                 break;
         }
-        for(int i = 0 ; i < cnt ; i++) {
-            listArr.add(String.valueOf(MonsterData.getInstance().getMonsterList().get(i).get("monster")));
-        }
+
         diabloEgg.setVisibility(View.VISIBLE);
         starEgg.setVisibility(View.VISIBLE);
         overwatchEgg.setVisibility(View.VISIBLE);

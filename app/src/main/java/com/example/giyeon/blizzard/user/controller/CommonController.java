@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,6 +22,8 @@ import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.custom.StoryHandler;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 
 public class CommonController {
 
@@ -28,6 +31,10 @@ public class CommonController {
     public static MediaPlayer backgroundSound;
     private StoryHandler handler;
     private Animation removeAnimation;
+    private Thread t;
+    private Message msg;
+
+
 
     private CommonController() {
 
@@ -43,19 +50,21 @@ public class CommonController {
 
     public void threadStart(TextView storyText, String word) {
         final String finalWord = word;
+
         handler = new StoryHandler(storyText, word);
 
-        Thread t = new Thread(new Runnable() {
+        t = new Thread(new Runnable() {
             @Override
             public void run() {
                 for(int i =0 ; i< finalWord.length() ; i++) {
                     try {
                         Thread.sleep(100);
-                        Message msg = handler.obtainMessage(i);
+                        msg = handler.obtainMessage(i);
                         msg.arg1 = i;
                         handler.sendMessage(msg);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        break;
                     }
                 }
                 //Out Text
@@ -63,6 +72,18 @@ public class CommonController {
 
         });
         t.start();
+
+    }
+
+
+    public void threadStop() {
+        try {
+            handler.removeCallbacksAndMessages(0);
+            t.interrupt();
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
     public void setRemoveAnimation(Context context, int animation) {
         removeAnimation = AnimationUtils.loadAnimation(context, animation);
@@ -89,5 +110,18 @@ public class CommonController {
 
         return animatorSet;
     }
+
+    public void setFont() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("font/shylock_nbp.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+    }
+
+
+
+
+
 
 }

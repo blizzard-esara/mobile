@@ -49,6 +49,7 @@ import com.example.giyeon.blizzard.user.view.frag.FragFragEgg3;
 import com.example.giyeon.blizzard.user.view.frag.MainAdvantureFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainFragment;
 import com.example.giyeon.blizzard.user.view.frag.OverwatchQuesFragment;
+import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
 import com.example.giyeon.blizzard.user.view.frag.StarcraftQuesFragment;
 
 import org.w3c.dom.Text;
@@ -62,8 +63,6 @@ public class MainActivity extends AppCompatActivity
 
     Context context;
     /** Header Menu **/
-    RatingBar ratingBar;
-    ImageView userMonster;
     LinearLayout navHeaderContainer;
 
     View navHeaderView;
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        setNavHeader();
     }
 
     @Override
@@ -90,14 +88,6 @@ public class MainActivity extends AppCompatActivity
         setTitle("");
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -110,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         //myMethod
         setStatusBar();
-        setFont();
+        CommonController.getInstance().setFont();
         setBGM();
 
         //fragment Setting
@@ -166,32 +156,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+
         if (id == R.id.mainAdventure){
             MainAdvantureFragment.getInstance().setContext(context);
             manager.beginTransaction().replace(R.id.content_main, MainAdvantureFragment.getInstance()).commit();
 
-        } else if (id == R.id.monsterCollection) {
-            Toast.makeText(context, "monster Collection fragment 미구현", Toast.LENGTH_SHORT).show(); // must modification
-        } else if (id == R.id.friends) {
+        } else if (id == R.id.userInfo) {
             Toast.makeText(context, " friens fragment 미구현", Toast.LENGTH_SHORT).show(); // must modification
         } else if( id == R.id.explanation) {
             ExplanationFragment.getInstance().setContext(context);
             manager.beginTransaction().replace(R.id.content_main, ExplanationFragment.getInstance()).commit();
-        } else if( id == R.id.changeEgg) {
-            if(MonsterData.getInstance().getMonsterList().size() == 1) {
-                customDialog = new CustomDialog(context, "! 경고", "몬스터가 한마리밖에 없습니다.\n몬스터를 추가해주세요.",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                customDialog.dismiss();
-                            }
-                        });
-
-                customDialog.show();
-            } else {
-                startActivity(new Intent(MainActivity.this, MonsterChoiseActivity.class).putExtra("layout","main"));
-            }
-        } else if( id == R.id.starCraftQuize) {
+        } else if( id == R.id.shop) {
+            manager.beginTransaction().replace(R.id.content_main, ShopFragment.getInstance()).commit();
+        }
+        /*
+        else if( id == R.id.starCraftQuize) {
 
             StarcraftQuesFragment.getInstance().setContext(context);
             manager.beginTransaction().replace(R.id.content_main, StarcraftQuesFragment.getInstance()).commit();
@@ -212,6 +192,7 @@ public class MainActivity extends AppCompatActivity
                     });
             customDialog.show();
         }
+        */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -270,29 +251,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        userMonster = (ImageView)navHeaderView.findViewById(R.id.userMonster);
-        TextView userIdHeadView = (TextView)navHeaderView.findViewById(R.id.userIdHeadView);
-        ratingBar = (RatingBar)navHeaderView.findViewById(R.id.expRating);
-        userIdHeadView.setText(UserData.getInstance().getId()+"님 환영합니다.");
 
-    }
-    private void setNavHeader() {
-        ratingBar.setRating(MonsterData.getInstance().getLevel());
-        //userMonster.setImageResource(R.drawable.diablo_egg);
-
-        Glide.with(navHeaderView).load(MonsterData.getInstance().getMonsterUrl()
-                //"http://10.0.2.2/blizzard/eggImage/overWatch1.png"
-        ).apply(new RequestOptions().circleCrop()).into(userMonster);
 
     }
 
-    private void setFont() {
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("font/shylock_nbp.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-    }
+
+
     private void applyFontToMenuItem(MenuItem mi, boolean ko) {
         Typeface font;
         if(ko) {

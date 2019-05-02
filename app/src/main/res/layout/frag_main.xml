@@ -18,31 +18,15 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+    <com.example.giyeon.blizzard.user.custom.CustomIndicator
+        android:id="@+id/customIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 
-
-    <!--
-   <ViewFlipper
-       android:id="@+id/viewFlipper"
-       android:layout_width="500dp"
-       android:layout_height="500dp"
-       android:layout_marginTop="30dp">
-
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/diablo_egg"/>
-
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/starcraft_egg"/>
-
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/starcraft_egg"/>
-
-   </ViewFlipper>
-   -->
 </RelativeLayout>

@@ -1,11 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="explanation"/>
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:background="#6ec7b5">
 
-</android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragExplanation_storyRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:translationZ="-1dp"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/lab_speech_bubble"/>
+        <TextView
+            android:id="@+id/fragExplanation_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:fontFamily="@font/pfstardust"
+            android:layout_marginLeft="15dp"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/fragExplanation_lab_doctor"
+        android:layout_below="@id/fragExplanation_storyRelative"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:src="@drawable/lab_doctor"/>
+
+    <RelativeLayout
+        android:layout_below="@id/fragExplanation_lab_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:paddingTop="50dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+
+        android:background="@drawable/lab_box">
+
+       <ImageView
+           android:id="@+id/fragExplanation_collection"
+           android:layout_width="110dp"
+           android:layout_marginTop="15dp"
+           android:layout_height="80dp"
+
+           android:layout_alignParentLeft="true"
+           android:src="@drawable/book"/>
+
+        <TextView
+            android:layout_below="@id/fragExplanation_collection"
+            android:layout_width="110dp"
+            android:gravity="center"
+            android:fontFamily="@font/pfstardust"
+            android:layout_marginTop="15dp"
+            android:textSize="22sp"
+            android:lineSpacingExtra="3dp"
+            android:layout_height="wrap_content"
+            android:text="캐릭터\n도감"
+            />
+
+        <ImageView
+            android:id="@+id/fragExplanation_dictionary"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/book_dictionary"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_below="@id/fragExplanation_dictionary"
+            android:layout_width="110dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:fontFamily="@font/pfstardust"
+            android:textSize="22sp"
+            android:lineSpacingExtra="3dp"
+            android:layout_height="wrap_content"
+            android:text="수집글\n사전"
+            />
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.view.frag.FragFragEgg1;
 import com.example.giyeon.blizzard.user.view.frag.FragFragEgg2;
 import com.example.giyeon.blizzard.user.view.frag.FragFragEgg3;
@@ -50,6 +51,8 @@ public class SessionPageAdapter extends FragmentPagerAdapter {
     @Override // 위에 숫자 생성 OK
     public int getCount() {
         // Show 4 total pages.
-        return 3;
+        int cnt = MonsterData.getInstance().getMonsterList().size();
+        if(cnt <3) cnt++;
+        return cnt;
     }
 }

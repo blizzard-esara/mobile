@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.giyeon.blizzard.R;
+import com.example.giyeon.blizzard.user.custom.CustomIndicator;
 import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
+import com.example.giyeon.blizzard.user.dto.MonsterData;
 
 public class MainFragment extends Fragment {
     private Context context;
     private View view;
-
+    private CustomIndicator customIndicator;
     private ViewPager vpPager;
 
 
@@ -36,26 +38,47 @@ public class MainFragment extends Fragment {
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        vpPager.setAdapter(new SessionPageAdapter(getChildFragmentManager()));
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main, container, false);
-        vpPager = (ViewPager)view.findViewById(R.id.vpPager);
+        initCustomIndicator();
 
+        vpPager = (ViewPager)view.findViewById(R.id.vpPager);
+        vpPager.setAdapter(new SessionPageAdapter(getChildFragmentManager()));
+        vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                customIndicator.selectDot(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
 
         return view;
-    }
+   }
+
+   private void initCustomIndicator() {
+       customIndicator = (CustomIndicator)view.findViewById(R.id.customIndicator);
+       customIndicator.setItemMargin(15);
+       customIndicator.setAnimDuration(300);
+       int monsterCnt = MonsterData.getInstance().getMonsterList().size();
+       if(monsterCnt <3) {
+           customIndicator.createDotPanel(monsterCnt+1, R.mipmap.icon_min_starcraft , R.mipmap.icon_min_overwatch);
+       } else {
+           customIndicator.createDotPanel(monsterCnt, R.drawable.basic_egg , R.drawable.diablo_egg);
+       }
+   }
+
 
 }

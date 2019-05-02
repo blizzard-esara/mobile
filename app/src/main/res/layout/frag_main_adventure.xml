@@ -1,12 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/fragAdventureMain_storyRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:translationZ="-1dp"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/speech_frame"/>
+        <TextView
+            android:id="@+id/fragAdventureMain_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="15dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/pfstardust"
+            android:layout_marginLeft="80dp"/>
+    </RelativeLayout>
+    
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="어드벤처"/>
+        android:src="@drawable/explanation_background_tmp"/>
+    
+    <RelativeLayout
+        android:id="@+id/fragAdventureMain_starcraftRelative"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        >
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/icon_starcraft"/>
+
+        <Button
+            android:id="@+id/fragAdventureMain_starcraftBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_frame"
+            android:fontFamily="@font/pfstardust"
+            android:text="문제풀러가기!"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragAdventureMain_overWatchRelative"
+            android:layout_below="@id/fragAdventureMain_starcraftRelative"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="70dp"
+            >
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_overwatch"/>
+
+            <Button
+                android:id="@+id/fragAdventureMain_overWatchBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_frame"
+                android:fontFamily="@font/pfstardust"
+                android:text="문제풀러가기!"
+                android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragAdventureMain_diabloRelative"
+        android:layout_below="@id/fragAdventureMain_overWatchRelative"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        >
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/icon_diablo"/>
+
+        <Button
+            android:id="@+id/fragAdventureMain_diabloBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/pfstardust"
+            android:background="@drawable/button_frame"
+            android:text="문제풀러가기!"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
