@@ -6,6 +6,7 @@ public class UserData {
     private String phone;
     private String gender;
     private String age;
+    private int money;
 
 
 
@@ -43,6 +44,14 @@ public class UserData {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     private static class LazyHolder {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="110dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shop_item_box_small">
+        <LinearLayout
+            android:id="@+id/item_imageLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/item_imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/overwatch_egg"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/grid_item_textView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_below="@id/item_imageLinear"
+            android:fontFamily="@font/pfstardust"
+            android:textColor="#000"
+            android:textSize="14dp"
+            android:text="TextView"/>
+
+        <TextView
+            android:id="@+id/grid_item_priceTextView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="17dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_below="@id/grid_item_textView"
+            android:fontFamily="@font/pfstardust"
+            android:textColor="#000"
+            android:textSize="14dp"
+            android:text="TextView"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

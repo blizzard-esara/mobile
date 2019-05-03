@@ -122,8 +122,7 @@ public class FragFragEgg1 extends Fragment {
         produceInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getParentFragment().getActivity(), "미구현 컨텐츠", Toast.LENGTH_SHORT).show();
-                //CommonEvent.getInstance().mainThreeBtnEvent("produce", monsterData, getParentFragment().getFragmentManager());
+                CommonEvent.getInstance().mainThreeBtnEvent("shop", monsterData, getParentFragment().getFragmentManager());
             }
         });
     }

@@ -6,6 +6,7 @@ import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainAdvantureFragment;
+import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class CommonEvent {
     private static class LazyHolder {
         public static final CommonEvent INSTANCE = new CommonEvent();
     }
+
     public static CommonEvent getInstance() {
         return LazyHolder.INSTANCE;
     }
@@ -34,11 +36,15 @@ public class CommonEvent {
             case "adventure":
                 fragmentManager.beginTransaction().replace(R.id.content_main, MainAdvantureFragment.getInstance()).commit();
                 break;
-            case "produce":
-                //fragmentManager.beginTransaction().replace(R.id.content_main, ExplanationFragment.getInstance()).commit();
+            case "shop":
+                fragmentManager.beginTransaction().replace(R.id.content_main, ShopFragment.getInstance()).commit();
                 break;
 
         }
 
+    }
+
+    public void mainThreeBtnEvent(FragmentManager fragmentManager) {
+        fragmentManager.beginTransaction().replace(R.id.content_main, ShopFragment.getInstance()).commit();
     }
 }

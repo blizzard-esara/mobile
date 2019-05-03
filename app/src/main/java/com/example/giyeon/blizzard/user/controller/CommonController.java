@@ -75,7 +75,6 @@ public class CommonController {
 
     }
 
-
     public void threadStop() {
         try {
             handler.removeCallbacksAndMessages(0);
