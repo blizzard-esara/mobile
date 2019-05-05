@@ -98,7 +98,7 @@ public class ShopFragment extends Fragment {
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
                 //Toast.makeText(getActivity().getApplicationContext(), position+"click", Toast.LENGTH_SHORT).show();
                 if(!hasItem[position] && UserData.getInstance().getMoney() >= priceArr[position]) {
-                    if(position < 4) {
+                    if(position < 3) {
 
 
                         customShopDialog = new CustomShopDialog(parent.getContext(), imArr[position], titleArr[position], priceArr[position], new View.OnClickListener() {

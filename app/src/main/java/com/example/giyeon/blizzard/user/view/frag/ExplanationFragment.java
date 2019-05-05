@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 
@@ -18,6 +21,8 @@ public class ExplanationFragment extends Fragment {
     private Context context;
     private View view;
     private TextView speakTv;
+    private ImageView collectionIv;
+
     private final String word = "안녕! 여기는 연구소에요!     \n"+
             "당신이 수집한 알과 글들을 확인할수 있는 장소죠.     \n"+
             "보고싶은것을 골라보세요!";
@@ -43,6 +48,16 @@ public class ExplanationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_explanation, container, false);
         speakTv = (TextView)view.findViewById(R.id.fragExplanation_story);
+        collectionIv = (ImageView)view.findViewById(R.id.fragExplanation_collection);
+        collectionIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonController.getInstance().threadStop();
+                CollectionFragment collectionFragment = new CollectionFragment();
+                getFragmentManager().beginTransaction().replace(R.id.content_main, collectionFragment).commit();
+            }
+        });
+
         CommonController.getInstance().threadStop();
         CommonController.getInstance().threadStart(speakTv,word);
         return view;

@@ -1,119 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/quiz_background"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
-    <RelativeLayout
-        android:id="@+id/fragAdventureMain_storyRelative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="70dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:translationZ="-1dp"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/speech_frame"/>
-        <TextView
-            android:id="@+id/fragAdventureMain_story"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text=""
-            android:layout_marginTop="15dp"
-            android:textSize="15sp"
-            android:fontFamily="@font/pfstardust"
-            android:layout_marginLeft="80dp"/>
-    </RelativeLayout>
-    
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/explanation_background_tmp"/>
-    
-    <RelativeLayout
-        android:id="@+id/fragAdventureMain_starcraftRelative"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="70dp"
-        >
+      <ImageView
+          android:id="@+id/mainAdventure_quize_trainnerIv"
+          android:layout_width="130dp"
+          android:layout_height="157dp"
+          android:src="@drawable/quiz_start_trainer"/>
 
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/icon_starcraft"/>
 
-        <Button
-            android:id="@+id/fragAdventureMain_starcraftBtn"
-            android:layout_width="match_parent"
-            android:textColor="#000"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_frame"
-            android:fontFamily="@font/pfstardust"
-            android:text="문제풀러가기!"
-            android:textSize="16sp"/>
-    </RelativeLayout>
+      <RelativeLayout
+          android:id="@+id/fragshop_topRelative"
+          android:layout_toRightOf="@id/mainAdventure_quize_trainnerIv"
+          android:layout_width="230dp"
+          android:layout_height="160dp">
 
-        <RelativeLayout
-            android:id="@+id/fragAdventureMain_overWatchRelative"
-            android:layout_below="@id/fragAdventureMain_starcraftRelative"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
-            >
 
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/icon_overwatch"/>
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_alignParentLeft="true"
+              android:src="@drawable/quiz_start_speechbubble"
+              />
 
-            <Button
-                android:id="@+id/fragAdventureMain_overWatchBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:background="@drawable/button_frame"
-                android:fontFamily="@font/pfstardust"
-                android:text="문제풀러가기!"
-                android:textSize="16sp"/>
+          <TextView
+              android:id="@+id/mainAdvanture_storyTv"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="40dp"
+              android:paddingBottom="10dp"
+              android:paddingTop="15dp"
+              android:paddingRight="20dp"
+              android:fontFamily="@font/pfstardust"
+              android:textColor="#000"
+              android:gravity="center"
+              android:layout_alignParentLeft="true"
+              android:text="오버워치 문제를 골랐네 좋아~ 화끈하게 시작해보자구!"
+              android:lineSpacingExtra="10sp"
+              android:textSize="15sp"/>
 
-    </RelativeLayout>
+      </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/fragAdventureMain_diabloRelative"
-        android:layout_below="@id/fragAdventureMain_overWatchRelative"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="70dp"
-        >
 
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/icon_diablo"/>
 
-        <Button
-            android:id="@+id/fragAdventureMain_diabloBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/pfstardust"
-            android:textColor="#000"
-            android:background="@drawable/button_frame"
-            android:text="문제풀러가기!"
-            android:textSize="16sp"/>
 
-    </RelativeLayout>
+  </RelativeLayout>
 
 </RelativeLayout>

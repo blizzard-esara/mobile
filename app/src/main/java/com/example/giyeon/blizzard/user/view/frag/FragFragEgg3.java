@@ -109,6 +109,17 @@ public class FragFragEgg3 extends Fragment {
         explanationBtn = (Button)view.findViewById(R.id.fragfrag3_explanationBtn);
         adventureStartBtn = (Button)view.findViewById(R.id.fragfrag3_adventureStartBtn);
         produceInfoBtn = (Button)view.findViewById(R.id.fragfrag3_produceInfoBtn);
+
+        monsterEgg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EggDetailsFragment eggDetailsFragment = new EggDetailsFragment(monsterData.get("monster").toString(),
+                        monsterData.get("exp").toString(),
+                        monsterData.get("level").toString(),
+                        monsterData.get("url").toString());
+                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, eggDetailsFragment).commit();
+            }
+        });
     }
 
     public void setContent() {

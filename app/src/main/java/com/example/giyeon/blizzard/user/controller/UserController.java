@@ -213,14 +213,34 @@ public class UserController {
         }
     }
 
+    public List<Map<String, Object>> monsterCollection() {
+        String result = "";
+        List<Map<String, Object>> collectionList;
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/monsterCollection",
+                                        "id="+UserData.getInstance().getId());
+        try {
+            result = networkTask.execute().get();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        collectionList = gson.fromJson(result, new TypeToken<List<Map<String, Object>>>(){}.getType());
+
+        return collectionList;
+    }
+
     private void jsonConvertToList(String result) {
         Gson gson = new Gson();
         List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
         MonsterData.getInstance().setMonsterList(monsterList);
 
         for(int i = 0 ; i < monsterList.size() ; i++) {
-            monsterList.get(i).put("url",mainMonsterImageURL(
-                    UserData.getInstance().getId(),
+            monsterList.get(i).put("url",SimpleData.getInstance().getImageUrl()+
+                    mainMonsterImageURL(UserData.getInstance().getId(),
                     MonsterData.getInstance().getMonsterList().get(i).get("monster").toString()
             ));
         }

@@ -20,7 +20,7 @@ public class CustomGridAdapter extends BaseAdapter {
     private int [] priceArr;
     private boolean [] hasItem;
 
-    public CustomGridAdapter(Context context,int[] imArr, String[] titleArr, int[] priceArr, boolean [] hasItem) {
+    public CustomGridAdapter(Context context, int[] imArr, String[] titleArr, int[] priceArr, boolean [] hasItem) {
         this.imArr = imArr;
         this.titleArr = titleArr;
         this.priceArr = priceArr;
@@ -51,7 +51,7 @@ public class CustomGridAdapter extends BaseAdapter {
         if(view == null) {
 
            inflater = LayoutInflater.from(context);
-            view = inflater.inflate(R.layout.shop_item_girdview, parent, false);
+            view = inflater.inflate(R.layout.girdview_item_shop, parent, false);
         }
 
         ImageView imageView =(ImageView)view.findViewById(R.id.item_imageView);

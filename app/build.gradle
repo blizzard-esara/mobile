@@ -28,6 +28,7 @@ dependencies {
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'me.relex:circleindicator:1.2.2'
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     testImplementation 'junit:junit:4.12'

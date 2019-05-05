@@ -19,9 +19,7 @@ public class MainAdvantureFragment extends Fragment {
     private Context context;
     private View view;
     private TextView speakTv;
-    private final String word =  "안녕! 여기는 모험이에요!     \n"+
-            "경험치를 얻고 성장할 수 있는 컨텐츠에요.     \n"+
-            "당신이 풀어보고 싶은 컨텐츠를 골라보세요!";
+    private final String word =  "문제를 풀어서 그 경험치로 알을 성장시킬수 있어! 문제를 골라봐!";
 
     @SuppressLint("ValidFragment")
     private MainAdvantureFragment() {
@@ -44,7 +42,7 @@ public class MainAdvantureFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main_adventure, container, false);
 
-        speakTv = (TextView)view.findViewById(R.id.fragAdventureMain_story);
+        speakTv = (TextView)view.findViewById(R.id.mainAdvanture_storyTv);
         CommonController.getInstance().threadStop();
         CommonController.getInstance().threadStart(speakTv,word);
         return view;
