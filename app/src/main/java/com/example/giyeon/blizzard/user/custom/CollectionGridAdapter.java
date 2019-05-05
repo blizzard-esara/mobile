@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.Map;

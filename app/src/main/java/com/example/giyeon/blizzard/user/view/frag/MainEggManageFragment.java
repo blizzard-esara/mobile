@@ -16,28 +16,10 @@ import com.example.giyeon.blizzard.user.custom.CustomIndicator;
 import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 
-public class MainFragment extends Fragment {
-    private Context context;
+public class MainEggManageFragment extends Fragment {
     private View view;
     private CustomIndicator customIndicator;
     private ViewPager vpPager;
-
-
-    @SuppressLint("ValidFragment")
-    private MainFragment() {
-
-    }
-    private static class LazyHolder {
-        public static final MainFragment INSTANCE = new MainFragment();
-    }
-    public static MainFragment getInstance() {
-        return LazyHolder.INSTANCE;
-    }
-    public void setContext(Context context) {
-        this.context = context;
-
-    }
-
 
     @Nullable
     @Override
@@ -76,7 +58,7 @@ public class MainFragment extends Fragment {
        if(monsterCnt <3) {
            customIndicator.createDotPanel(monsterCnt+1, R.mipmap.icon_min_starcraft , R.mipmap.icon_min_overwatch);
        } else {
-           customIndicator.createDotPanel(monsterCnt, R.drawable.basic_egg , R.drawable.diablo_egg);
+           customIndicator.createDotPanel(monsterCnt, R.mipmap.icon_min_starcraft , R.mipmap.icon_min_overwatch);
        }
    }
 

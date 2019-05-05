@@ -2,6 +2,7 @@ package com.example.giyeon.blizzard.user.view.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,11 +24,14 @@ import com.example.giyeon.blizzard.user.controller.CommonEvent;
 import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
 import java.util.Map;
 
-public class FragFragEgg2 extends Fragment {
+@SuppressLint("ValidFragment")
+public class FragFragEgg1 extends Fragment {
 
-    private Context context;
     private Map<String, Object> monsterData;
     private View view;
 
@@ -41,79 +45,52 @@ public class FragFragEgg2 extends Fragment {
     private Button explanationBtn;
     private Button adventureStartBtn;
     private Button produceInfoBtn;
-    
+
     @SuppressLint("ValidFragment")
-    private FragFragEgg2() {
-
+    public FragFragEgg1(Map<String, Object> monsterData) {
+        this.monsterData = monsterData;
     }
 
-    private static class LazyHolder {
-        public static final FragFragEgg2 INSTANCE = new FragFragEgg2();
-    }
-
-
-    public static FragFragEgg2 getInstance() {
-        return LazyHolder.INSTANCE;
-    }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(MonsterData.getInstance().getMonsterList().size() >1) {
-            view = inflater.inflate(R.layout.frag_frag_egg2, container, false);
-            monsterData = MonsterData.getInstance().getMonsterList().get(1);
-            setView();
-            setContent();
-            Glide.with(getParentFragment().getActivity()).load(monsterData.get("url").toString()).into(monsterEgg);
-            CommonController.getInstance().setFont();
+        view = inflater.inflate(R.layout.frag_frag_egg1, container, false);
 
-        } else {
-            view = inflater.inflate(R.layout.frag_frag_egg_lock, container, false);
-            Button button = (Button)view.findViewById(R.id.fragfragLock_eggShop);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CommonEvent.getInstance().mainThreeBtnEvent(getParentFragment().getFragmentManager());
-                }
-            });
-        }
+        //monsterData =
+        setView();
+        setContent();
+        Glide.with(getParentFragment().getActivity()).load(monsterData.get("url").toString()).into(monsterEgg);
+        CommonController.getInstance().setFont();
 
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    private void setView() {
-        monsterEgg = (ImageView)view.findViewById(R.id.fragfrag2_monsterEgg);
-        userId = (TextView)view.findViewById(R.id.fragfrag2_userId);
-        eggLevel = (TextView)view.findViewById(R.id.fragfrag2_eggLevelTxt);
-        eggTypeTxt = (TextView)view.findViewById(R.id.fragfrag2_eggTypeTxt);
-        expBar = (SeekBar) view.findViewById(R.id.fragfrag2_expBar);
+     private void setView() {
+        monsterEgg = (ImageView)view.findViewById(R.id.fragfrag1_monsterEgg);
+        userId = (TextView)view.findViewById(R.id.fragfrag1_userId);
+        eggLevel = (TextView)view.findViewById(R.id.fragfrag1_eggLevelTxt);
+        eggTypeTxt = (TextView)view.findViewById(R.id.fragfrag1_eggTypeTxt);
+        expBar = (SeekBar) view.findViewById(R.id.fragfrag1_expBar);
         expBar.setEnabled(false);
 
-        expTxt = (TextView)view.findViewById(R.id.fragfrag2_expTxt);
+        expTxt = (TextView)view.findViewById(R.id.fragfrag1_expTxt);
 
-        explanationBtn = (Button)view.findViewById(R.id.fragfrag2_explanationBtn);
-        adventureStartBtn = (Button)view.findViewById(R.id.fragfrag2_adventureStartBtn);
-        produceInfoBtn = (Button)view.findViewById(R.id.fragfrag2_produceInfoBtn);
+        explanationBtn = (Button)view.findViewById(R.id.fragfrag1_explanationBtn);
+        adventureStartBtn = (Button)view.findViewById(R.id.fragfrag1_adventureStartBtn);
+        produceInfoBtn = (Button)view.findViewById(R.id.fragfrag1_produceInfoBtn);
+
 
         monsterEgg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EggDetailsFragment eggDetailsFragment = new EggDetailsFragment(monsterData.get("monster").toString(),
-                        monsterData.get("exp").toString(),
-                        monsterData.get("level").toString(),
-                        monsterData.get("url").toString());
+                                                                                monsterData.get("exp").toString(),
+                                                                                monsterData.get("level").toString(),
+                                                                                monsterData.get("url").toString());
                 getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, eggDetailsFragment).commit();
+                //manager.beginTransaction().replace(R.id.content_main, MainQuizeFragment.getInstance()).commit();
+
             }
         });
     }
@@ -128,6 +105,7 @@ public class FragFragEgg2 extends Fragment {
         explanationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 CommonEvent.getInstance().mainThreeBtnEvent("explanation", monsterData, getParentFragment().getFragmentManager());
 
@@ -150,4 +128,6 @@ public class FragFragEgg2 extends Fragment {
             }
         });
     }
+
+
 }
