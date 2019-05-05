@@ -23,7 +23,6 @@ public class MainAdvantureFragment extends Fragment {
 
     @SuppressLint("ValidFragment")
     private MainAdvantureFragment() {
-
     }
 
     private static class LazyHolder {
