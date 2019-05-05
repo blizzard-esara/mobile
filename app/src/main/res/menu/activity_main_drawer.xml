@@ -16,7 +16,7 @@
             android:title="연구소" />
         <item
             android:id="@+id/shop"
-            android:icon="@drawable/tmpicon"
+            android:icon="@drawable/shop_icon"
             android:title="상점"/>
 
         <item

@@ -18,9 +18,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_height="wrap_content" />
     <com.example.giyeon.blizzard.user.custom.CustomIndicator
         android:id="@+id/customIndicator"
         android:layout_width="wrap_content"

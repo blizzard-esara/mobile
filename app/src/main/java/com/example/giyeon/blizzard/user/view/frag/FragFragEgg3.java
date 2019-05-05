@@ -83,6 +83,13 @@ public class FragFragEgg3 extends Fragment {
             CommonController.getInstance().setFont();
         } else {
             view = inflater.inflate(R.layout.frag_frag_egg_lock, container, false);
+            Button button = (Button)view.findViewById(R.id.fragfragLock_eggShop);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CommonEvent.getInstance().mainThreeBtnEvent(getParentFragment().getFragmentManager());
+                }
+            });
         }
 
 
@@ -102,6 +109,17 @@ public class FragFragEgg3 extends Fragment {
         explanationBtn = (Button)view.findViewById(R.id.fragfrag3_explanationBtn);
         adventureStartBtn = (Button)view.findViewById(R.id.fragfrag3_adventureStartBtn);
         produceInfoBtn = (Button)view.findViewById(R.id.fragfrag3_produceInfoBtn);
+
+        monsterEgg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EggDetailsFragment eggDetailsFragment = new EggDetailsFragment(monsterData.get("monster").toString(),
+                        monsterData.get("exp").toString(),
+                        monsterData.get("level").toString(),
+                        monsterData.get("url").toString());
+                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, eggDetailsFragment).commit();
+            }
+        });
     }
 
     public void setContent() {
@@ -114,11 +132,7 @@ public class FragFragEgg3 extends Fragment {
         explanationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 CommonEvent.getInstance().mainThreeBtnEvent("explanation", monsterData, getParentFragment().getFragmentManager());
-
-
             }
         });
 
@@ -133,8 +147,7 @@ public class FragFragEgg3 extends Fragment {
         produceInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getParentFragment().getActivity(), "미구현 컨텐츠", Toast.LENGTH_SHORT).show();
-                //CommonEvent.getInstance().mainThreeBtnEvent("produce", monsterData, getParentFragment().getFragmentManager());
+                CommonEvent.getInstance().mainThreeBtnEvent("shop", monsterData, getParentFragment().getFragmentManager());
             }
         });
     }

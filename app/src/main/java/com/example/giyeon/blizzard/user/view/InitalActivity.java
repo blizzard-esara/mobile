@@ -187,6 +187,7 @@ public class InitalActivity extends AppCompatActivity {
                             case "diablo" : CommonController.getInstance().removeEgg(starEgg, overwatchEgg); break;
                         }
 
+
                         MonsterData.getInstance().setExp(0);
                         MonsterData.getInstance().setLevel(1);
                         MonsterData.getInstance().setMainMonster(eggChar);
@@ -219,6 +220,7 @@ public class InitalActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         if(UserController.getInstance().eggChoise(UserData.getInstance().getId(), eggChar)) {
+                                            UserController.getInstance().initalCheck(UserData.getInstance().getId());
                                             startActivity(new Intent(InitalActivity.this, MainActivity.class));
                                             finish();
                                         }

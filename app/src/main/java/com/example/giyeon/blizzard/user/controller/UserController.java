@@ -93,6 +93,7 @@ public class UserController {
                 UserData.getInstance().setPhone(jsonObject.get("phone").toString());
                 UserData.getInstance().setGender(jsonObject.get("gender").toString());
                 UserData.getInstance().setAge(jsonObject.get("age").toString());
+                UserData.getInstance().setMoney(Integer.parseInt(jsonObject.get("money").toString()));
                 loginCheck = true;
             }
 
@@ -119,20 +120,12 @@ public class UserController {
                     returnInt = -1;
                 } else {
 
-                    Gson gson = new Gson();
-                    List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
-                    MonsterData.getInstance().setMonsterList(monsterList);
 
-                    for(int i = 0 ; i < monsterList.size() ; i++) {
-                        monsterList.get(i).put("url",mainMonsterImageURL(
-                                                                        UserData.getInstance().getId(),
-                                                                        MonsterData.getInstance().getMonsterList().get(i).get("monster").toString()
-                        ));
-                    }
+                    jsonConvertToList(result);
 
 
-                    returnInt = monsterList.size();
                     JSONArray jsonArray = new JSONArray(result);
+                    returnInt = jsonArray.length();
 
                     if(jsonArray.length() == 1) {
 
@@ -189,5 +182,68 @@ public class UserController {
         }
 
         return result;
+    }
+
+    public void buyItem(String itemKind, int price) {
+        String result = "";
+
+        switch (itemKind) {
+            case "스타크래프트 알":
+                itemKind = "starCraft";
+                break;
+            case "오버워치 알":
+                itemKind = "overWatch";
+                break;
+            case "디아블로 알":
+                itemKind = "diablo";
+                break;
+        }
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/buyItem",
+                "id="+UserData.getInstance().getId()+"&item="+itemKind+"&price="+price);
+        try {
+            result = networkTask.execute().get();
+
+            jsonConvertToList(result);
+
+            UserData.getInstance().setMoney(UserData.getInstance().getMoney() - price);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Map<String, Object>> monsterCollection() {
+        String result = "";
+        List<Map<String, Object>> collectionList;
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/monsterCollection",
+                                        "id="+UserData.getInstance().getId());
+        try {
+            result = networkTask.execute().get();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        collectionList = gson.fromJson(result, new TypeToken<List<Map<String, Object>>>(){}.getType());
+
+        return collectionList;
+    }
+
+    private void jsonConvertToList(String result) {
+        Gson gson = new Gson();
+        List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
+        MonsterData.getInstance().setMonsterList(monsterList);
+
+        for(int i = 0 ; i < monsterList.size() ; i++) {
+            monsterList.get(i).put("url",SimpleData.getInstance().getImageUrl()+
+                    mainMonsterImageURL(UserData.getInstance().getId(),
+                    MonsterData.getInstance().getMonsterList().get(i).get("monster").toString()
+            ));
+        }
+
     }
 }

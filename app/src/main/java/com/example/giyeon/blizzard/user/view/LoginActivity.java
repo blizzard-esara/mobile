@@ -45,27 +45,28 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(idTxt.getText().toString().equals("") || pwTxt.getText().toString().equals("")) {
+                if (idTxt.getText().toString().equals("") || pwTxt.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "ID와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(UserController.getInstance().checkLogin(idTxt.getText().toString(), pwTxt.getText().toString())) {
+                    if (UserController.getInstance().checkLogin(idTxt.getText().toString(), pwTxt.getText().toString())) {
                         int checkHasMonster = UserController.getInstance().initalCheck(UserData.getInstance().getId());
-                        if(checkHasMonster == -1) {
+                        if (checkHasMonster == -1) {
                             //처음 사용자일때
-                            startActivity(new Intent(LoginActivity.this ,InitalActivity.class));
-                        } else if(checkHasMonster == 1) {
+                            startActivity(new Intent(LoginActivity.this, InitalActivity.class));
+                        } else if (checkHasMonster > 0) {
                             MonsterData.getInstance().setExp(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("exp").toString()));
                             MonsterData.getInstance().setLevel(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("level").toString()));
                             MonsterData.getInstance().setMainMonster(MonsterData.getInstance().getMonsterList().get(0).get("monster").toString());
-                            MonsterData.getInstance().setMonsterUrl(UserController.getInstance().mainMonsterImageURL(UserData.getInstance().getId(), MonsterData.getInstance().getMainMonster()));
+                            MonsterData.getInstance().setMonsterUrl(MonsterData.getInstance().getMonsterList().get(0).get("url").toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-                        } else {
+                        }
+                        /*} else {
                             Intent intent = new Intent(LoginActivity.this, MonsterChoiseActivity.class);
                             startActivity(new Intent(LoginActivity.this, MonsterChoiseActivity.class).putExtra("layout","login"));
                         }
+                        */
 
-                            finish();
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "ID 혹은 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -73,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
         signUpBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {

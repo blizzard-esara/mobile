@@ -20,7 +20,6 @@ public class StoryHandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
-        Log.e("핸들러","핸들러 실행실행"+msg.arg1);
         story += w.charAt(msg.arg1);
         textView.setText(story);
     }

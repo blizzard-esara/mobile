@@ -1,10 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" android:background="#73c3b3">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="shop"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-15dp"
+        android:background="@drawable/shop_basic">
+
+        <ImageView
+            android:id="@+id/fragshop_title"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/shop_name"/>
+
+        <RelativeLayout
+            android:id="@+id/fragshop_mainRelative"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingTop="7dp"
+            android:paddingLeft="7dp"
+
+            android:layout_marginBottom="-13dp"
+            android:layout_below="@id/fragshop_title"
+            android:background="@drawable/shop_item_box">
+
+            <GridView
+                android:id="@+id/fragshop_gridView"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/fragshop_pointTxt"
+            android:layout_below="@id/fragshop_mainRelative"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="22dp"
+            android:paddingTop="19dp"
+            android:paddingBottom="17dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="내 포인트 : 5"
+            android:textColor="#000"
+            android:fontFamily="@font/pfstardust"
+            android:textSize="14sp"
+            android:background="@drawable/shop_mypoint"/>
+
+
+        <RelativeLayout
+            android:id="@+id/fragshop_topRelative"
+            android:layout_width="300dp"
+            android:layout_height="160dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/shop_speechbubble"
+                    />
+
+                <TextView
+                    android:id="@+id/fragshop_storyTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="65dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="80dp"
+                    android:fontFamily="@font/pfstardust"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:lineSpacingExtra="7sp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+
+
+    </RelativeLayout>
 </RelativeLayout>

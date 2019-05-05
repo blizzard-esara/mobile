@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@drawable/main_background">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,10 +33,12 @@
     <RelativeLayout
         android:id="@+id/fragfrag1_eggStatusRelative"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:layout_height="110dp"
         android:orientation="horizontal"
         android:layout_below="@+id/fragfrag1_eggImageLinear"
-        android:background="@drawable/button_frame"
+        android:background="@drawable/main_box"
         android:layout_marginTop="30dp"
         >
         <TextView
@@ -46,6 +49,7 @@
             android:textSize="20sp"
             android:fontFamily="@font/pfstardust"
             android:layout_marginLeft="30dp"
+            android:textColor="#000"
             android:layout_alignParentLeft="true"
             android:text="알단계 : 1단계"/>
 
@@ -55,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="#000"
             android:text="알타입 : over watch"
             android:fontFamily="@font/pfstardust"
             android:layout_marginRight="30dp"
@@ -71,6 +76,7 @@
                 android:layout_height="match_parent"
                 android:textSize="16sp"
                 android:gravity="center"
+                android:textColor="#000"
                 android:layout_above="@+id/fragfrag1_expBar"
                 android:text="Exp"
                 android:fontFamily="@font/pfstardust"
@@ -86,9 +92,7 @@
                     android:layout_height="40dp"
                     android:max="100"
                     android:progress="50"
-                    android:clickable="false"
                     android:thumb="@null"
-                    android:onClick="@null"
                     android:splitTrack="false"
                     android:progressDrawable="@drawable/custom_seek_bar"
                     />
@@ -97,6 +101,7 @@
                     android:id="@+id/fragfrag1_expTxt"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:fontFamily="@font/pfstardust"
                     android:text="50%"/>
@@ -123,7 +128,8 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:text="연구소"
-            android:background="@drawable/button_frame"
+            android:textColor="#000"
+            android:background="@drawable/main_lab_box"
             android:fontFamily="@font/pfstardust"
             android:textSize="20sp"
             />
@@ -133,9 +139,10 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="2"
-            android:layout_marginLeft="15dp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
             android:textSize="20sp"
-            android:background="@drawable/button_frame"
+            android:background="@drawable/main_start_box"
             android:fontFamily="@font/pfstardust"
             android:text="모험하기"
             />
@@ -145,11 +152,12 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:layout_marginLeft="15dp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
             android:textSize="20sp"
-            android:background="@drawable/button_frame"
+            android:background="@drawable/main_shop_box"
             android:fontFamily="@font/pfstardust"
-            android:text="제작진"/>
+            android:text="상점"/>
     </LinearLayout>
 
     <ImageView

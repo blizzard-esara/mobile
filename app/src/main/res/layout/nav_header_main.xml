@@ -27,7 +27,7 @@
         android:textColor="#fff"
         android:fontFamily="@font/shylock_nbp"
         android:layout_marginBottom="3dp"
-        android:text="Team Leader : Song Chang "/>
+        android:text="Team Leader : SONG CHANG SEOP"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:fontFamily="@font/shylock_nbp"
-        android:text="Designer : YU HORIN"/>
+        android:text="Designer : YU HO RIN"/>
 
 
 </LinearLayout>
