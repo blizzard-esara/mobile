@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/quiz_background"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/quizlevel_topRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/mainAdventure_quize_trainnerIv"
+            android:layout_width="130dp"
+            android:layout_height="158dp"
+            android:src="@drawable/quiz_start_trainer"/>
+
+
+        <RelativeLayout
+            android:id="@+id/quizlevel_storyContainer"
+            android:layout_toRightOf="@id/mainAdventure_quize_trainnerIv"
+            android:layout_width="220dp"
+            android:layout_height="140dp">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/quiz_start_speechbubble"
+                />
+
+            <TextView
+                android:id="@+id/quizlevel_storyTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="40dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:paddingRight="20dp"
+                android:fontFamily="@font/pfstardust"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:lineSpacingExtra="10sp"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/quizlevel_easy"
+        android:layout_below="@id/quizlevel_topRelative"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/quiz_choice_box_easy">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="중급"
+            android:textSize="27sp"
+            android:fontFamily="@font/pfstardust"
+            android:textColor="#000"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/quizlevel_hard"
+        android:layout_below="@id/quizlevel_easy"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/quiz_choice_box_hard">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="고급"
+            android:textSize="27sp"
+            android:fontFamily="@font/pfstardust"
+            android:textColor="#000"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+</RelativeLayout>

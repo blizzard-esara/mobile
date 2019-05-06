@@ -4,58 +4,58 @@ package com.example.giyeon.blizzard.user.dto;
 import java.util.List;
 import java.util.Map;
 
-public class MonsterData {
+public class EggData {
 
-    private String mainMonster;
-    private int exp;
-    private int level;
-    private List<Map<String, Object>> monsterList;
-    private String monsterUrl;
+    private String mainEgg;
+    private int mainExp;
+    private int mainLevel;
+    private List<Map<String, Object>> eggList;
+    private String mainUrl;
 
     public List<Map<String, Object>> getMonsterList() {
-        return monsterList;
+        return eggList;
     }
 
     public void setMonsterList(List<Map<String, Object>> monsterList) {
-        this.monsterList = monsterList;
+        this.eggList = monsterList;
     }
 
-    public String getMainMonster() {
-        return mainMonster;
+    public String getMainEgg() {
+        return mainEgg;
     }
 
-    public void setMainMonster(String mainMonster) {
-        this.mainMonster = mainMonster;
+    public void setMainEgg(String mainEgg) {
+        this.mainEgg = mainEgg;
     }
 
-    public int getExp() {
-        return exp;
+    public int getMainExp() {
+        return mainExp;
     }
 
-    public void setExp(int exp) {
-        this.exp = exp;
+    public void setMainExp(int mainExp) {
+        this.mainExp = mainExp;
     }
 
-    public String getMonsterUrl() {
-        return monsterUrl;
+    public int getMainLevel() {
+        return mainLevel;
     }
 
-    public void setMonsterUrl(String monsterUrl) {
-        this.monsterUrl = monsterUrl;
+    public void setMainLevel(int mainLevel) {
+        this.mainLevel = mainLevel;
     }
 
-    public int getLevel() {
-        return level;
+    public String getMainUrl() {
+        return mainUrl;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setMainUrl(String mainUrl) {
+        this.mainUrl = mainUrl;
     }
 
     private static class LazyHolder {
-        public static final MonsterData INSTANCE = new MonsterData();
+        public static final EggData INSTANCE = new EggData();
     }
-    public static MonsterData getInstance() {
+    public static EggData getInstance() {
         return LazyHolder.INSTANCE;
     }
 }

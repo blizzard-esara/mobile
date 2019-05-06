@@ -14,16 +14,16 @@ import android.widget.Toast;
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
-import com.example.giyeon.blizzard.user.controller.UserController;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
+import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginBtn;
-    Button signUpBtn;
-    EditText idTxt;
-    EditText pwTxt;
+    private Button loginBtn;
+    private Button signUpBtn;
+    private EditText idTxt;
+    private EditText pwTxt;
 
     private Context context;
 
@@ -48,23 +48,18 @@ public class LoginActivity extends AppCompatActivity {
                 if (idTxt.getText().toString().equals("") || pwTxt.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "ID와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (UserController.getInstance().checkLogin(idTxt.getText().toString(), pwTxt.getText().toString())) {
-                        int checkHasMonster = UserController.getInstance().initalCheck(UserData.getInstance().getId());
+                    if (NetworkController.getInstance().checkLogin(idTxt.getText().toString(), pwTxt.getText().toString())) {
+                        int checkHasMonster = NetworkController.getInstance().initalCheck(UserData.getInstance().getId());
                         if (checkHasMonster == -1) {
                             //처음 사용자일때
                             startActivity(new Intent(LoginActivity.this, InitalActivity.class));
                         } else if (checkHasMonster > 0) {
-                            MonsterData.getInstance().setExp(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("exp").toString()));
-                            MonsterData.getInstance().setLevel(Integer.parseInt(MonsterData.getInstance().getMonsterList().get(0).get("level").toString()));
-                            MonsterData.getInstance().setMainMonster(MonsterData.getInstance().getMonsterList().get(0).get("monster").toString());
-                            MonsterData.getInstance().setMonsterUrl(MonsterData.getInstance().getMonsterList().get(0).get("url").toString());
+                            EggData.getInstance().setMainExp(Integer.parseInt(EggData.getInstance().getMonsterList().get(0).get("exp").toString()));
+                            EggData.getInstance().setMainLevel(Integer.parseInt(EggData.getInstance().getMonsterList().get(0).get("level").toString()));
+                            EggData.getInstance().setMainEgg(EggData.getInstance().getMonsterList().get(0).get("monster").toString());
+                            EggData.getInstance().setMainUrl(EggData.getInstance().getMonsterList().get(0).get("url").toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
-                        /*} else {
-                            Intent intent = new Intent(LoginActivity.this, MonsterChoiseActivity.class);
-                            startActivity(new Intent(LoginActivity.this, MonsterChoiseActivity.class).putExtra("layout","login"));
-                        }
-                        */
 
                         finish();
                     } else {

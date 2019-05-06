@@ -7,22 +7,23 @@
     android:paddingRight="30dp">
 
   <RelativeLayout
+      android:id="@+id/quizmain_topRelative"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="70dp">
+      android:layout_marginTop="50dp">
 
       <ImageView
           android:id="@+id/mainAdventure_quize_trainnerIv"
           android:layout_width="130dp"
-          android:layout_height="157dp"
+          android:layout_height="158dp"
           android:src="@drawable/quiz_start_trainer"/>
 
 
       <RelativeLayout
-          android:id="@+id/fragshop_topRelative"
+          android:id="@+id/quizmain_storyContainer"
           android:layout_toRightOf="@id/mainAdventure_quize_trainnerIv"
-          android:layout_width="230dp"
-          android:layout_height="160dp">
+          android:layout_width="220dp"
+          android:layout_height="140dp">
 
 
           <ImageView
@@ -33,7 +34,7 @@
               />
 
           <TextView
-              android:id="@+id/mainAdvanture_storyTv"
+              android:id="@+id/quizmain_storyTv"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:paddingLeft="40dp"
@@ -44,15 +45,92 @@
               android:textColor="#000"
               android:gravity="center"
               android:layout_alignParentLeft="true"
-              android:text="오버워치 문제를 골랐네 좋아~ 화끈하게 시작해보자구!"
               android:lineSpacingExtra="10sp"
               android:textSize="15sp"/>
-
       </RelativeLayout>
-
-
-
-
   </RelativeLayout>
 
+      <RelativeLayout
+          android:id="@+id/quizmain_overwatchRelative"
+          android:layout_below="@id/quizmain_topRelative"
+          android:layout_width="match_parent"
+          android:layout_height="110dp"
+          android:layout_marginTop="-5dp"
+          android:background="@drawable/quiz_start_box_overwatch">
+
+          <ImageView
+              android:id="@+id/quizmain_overwatch_icon"
+              android:layout_marginLeft="50dp"
+              android:layout_marginTop="25dp"
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:src="@drawable/icon_overwatch"/>
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_toRightOf="@id/quizmain_overwatch_icon"
+              android:text="OVER WATCH"
+              android:textSize="25sp"
+              android:fontFamily="@font/shylock_nbp"
+              android:textColor="#000"
+              android:layout_marginLeft="30dp"
+              android:gravity="center_vertical"/>
+      </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/quizmain_starCraftRelative"
+        android:layout_below="@id/quizmain_overwatchRelative"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/quiz_start_box_starcraft">
+
+        <ImageView
+            android:id="@+id/quizmain_starcraft_icon"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/icon_starcraft"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/quizmain_starcraft_icon"
+            android:text="STAR CRAFT"
+            android:textSize="25sp"
+            android:fontFamily="@font/shylock_nbp"
+            android:textColor="#000"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/quizmain_diabloRelative"
+        android:layout_below="@id/quizmain_starCraftRelative"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/quiz_start_box_diablo">
+
+        <ImageView
+            android:id="@+id/quizmain_diablo_icon"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/icon_diablo"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/quizmain_diablo_icon"
+            android:text="DIABLO"
+            android:textSize="25sp"
+            android:fontFamily="@font/shylock_nbp"
+            android:textColor="#000"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
 </RelativeLayout>

@@ -7,9 +7,9 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class StoryHandler extends Handler {
-    TextView textView;
-    String w;
-    String story;
+    private TextView textView;
+    private String w;
+    private String story;
 
     public StoryHandler(TextView textView, String w) {
         this.textView = textView;

@@ -1,7 +1,5 @@
 package com.example.giyeon.blizzard.user.view.frag;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.custom.CustomIndicator;
 import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
+import com.example.giyeon.blizzard.user.dto.EggData;
 
 public class MainEggManageFragment extends Fragment {
     private View view;
@@ -54,7 +52,7 @@ public class MainEggManageFragment extends Fragment {
        customIndicator = (CustomIndicator)view.findViewById(R.id.customIndicator);
        customIndicator.setItemMargin(15);
        customIndicator.setAnimDuration(300);
-       int monsterCnt = MonsterData.getInstance().getMonsterList().size();
+       int monsterCnt = EggData.getInstance().getMonsterList().size();
        if(monsterCnt <3) {
            customIndicator.createDotPanel(monsterCnt+1, R.mipmap.icon_min_starcraft , R.mipmap.icon_min_overwatch);
        } else {

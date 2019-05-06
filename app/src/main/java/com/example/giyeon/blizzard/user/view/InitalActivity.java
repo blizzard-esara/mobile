@@ -1,7 +1,6 @@
 package com.example.giyeon.blizzard.user.view;
 
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +18,9 @@ import android.widget.TextView;
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
-import com.example.giyeon.blizzard.user.controller.UserController;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
+import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
 public class InitalActivity extends AppCompatActivity {
@@ -188,9 +187,9 @@ public class InitalActivity extends AppCompatActivity {
                         }
 
 
-                        MonsterData.getInstance().setExp(0);
-                        MonsterData.getInstance().setLevel(1);
-                        MonsterData.getInstance().setMainMonster(eggChar);
+                        EggData.getInstance().setMainExp(0);
+                        EggData.getInstance().setMainLevel(1);
+                        EggData.getInstance().setMainEgg(eggChar);
 
 
 
@@ -219,8 +218,8 @@ public class InitalActivity extends AppCompatActivity {
                                 startGameBtn.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        if(UserController.getInstance().eggChoise(UserData.getInstance().getId(), eggChar)) {
-                                            UserController.getInstance().initalCheck(UserData.getInstance().getId());
+                                        if(NetworkController.getInstance().eggChoise(UserData.getInstance().getId(), eggChar)) {
+                                            NetworkController.getInstance().initalCheck(UserData.getInstance().getId());
                                             startActivity(new Intent(InitalActivity.this, MainActivity.class));
                                             finish();
                                         }

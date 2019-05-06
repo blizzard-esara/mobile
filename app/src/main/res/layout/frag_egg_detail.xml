@@ -12,7 +12,7 @@
  </RelativeLayout>
 
  <LinearLayout
-     android:id="@+id/eggDetailLinear"
+     android:id="@+id/eggdetail_Linear"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_below="@id/detail_topBackgroundRelative"
@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:layout_below="@id/eggDetailLinear"
+        android:layout_below="@id/eggdetail_Linear"
         android:layout_marginTop="20dp"
         android:background="@drawable/egg_info_box_tmp"
         android:layout_marginLeft="50dp"

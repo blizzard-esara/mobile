@@ -5,34 +5,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
-import com.example.giyeon.blizzard.user.controller.UserController;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomGridAdapter;
 import com.example.giyeon.blizzard.user.custom.CustomShopDialog;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
+import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
-import org.w3c.dom.Text;
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment implements MainActivity.OnBackPressedListener {
 
     private View view;
     private TextView stroyTv;
@@ -54,12 +44,10 @@ public class ShopFragment extends Fragment {
         };
     private boolean [] hasItem = {false, false, false, false, false, false};
 
-    private static class LazyHolder {
-        public static final ShopFragment INSTANCE = new ShopFragment();
-    }
-
-    public static ShopFragment getInstance() {
-        return LazyHolder.INSTANCE;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((MainActivity)context).setOnBackPressedListener(this);
     }
 
     @Nullable
@@ -74,21 +62,21 @@ public class ShopFragment extends Fragment {
         return view;
     }
 
-    private void setView() {
+    public void setView() {
         stroyTv = (TextView)view.findViewById(R.id.fragshop_storyTv);
         pointTxt = (TextView)view.findViewById(R.id.fragshop_pointTxt);
         gridView = (GridView)view.findViewById(R.id.fragshop_gridView);
 
     }
 
-    public void setContent() {
+     public void setContent() {
         pointTxt.setText("내 포인트 : "+UserData.getInstance().getMoney());
 
 
-        for(int i = 0 ; i< MonsterData.getInstance().getMonsterList().size() ; i++) {
-            if(MonsterData.getInstance().getMonsterList().get(i).get("monster").equals("starCraft")) hasItem[0] = true;
-            if(MonsterData.getInstance().getMonsterList().get(i).get("monster").equals("overWatch")) hasItem[1] = true;
-            if(MonsterData.getInstance().getMonsterList().get(i).get("monster").equals("diablo")) hasItem[2] = true;
+        for(int i = 0; i< EggData.getInstance().getMonsterList().size() ; i++) {
+            if(EggData.getInstance().getMonsterList().get(i).get("monster").equals("starCraft")) hasItem[0] = true;
+            if(EggData.getInstance().getMonsterList().get(i).get("monster").equals("overWatch")) hasItem[1] = true;
+            if(EggData.getInstance().getMonsterList().get(i).get("monster").equals("diablo")) hasItem[2] = true;
 
         }
 
@@ -96,7 +84,6 @@ public class ShopFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
-                //Toast.makeText(getActivity().getApplicationContext(), position+"click", Toast.LENGTH_SHORT).show();
                 if(!hasItem[position] && UserData.getInstance().getMoney() >= priceArr[position]) {
                     if(position < 3) {
 
@@ -104,7 +91,7 @@ public class ShopFragment extends Fragment {
                         customShopDialog = new CustomShopDialog(parent.getContext(), imArr[position], titleArr[position], priceArr[position], new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                UserController.getInstance().buyItem(titleArr[position], priceArr[position]);
+                                NetworkController.getInstance().buyItem(titleArr[position], priceArr[position]);
                                 customShopDialog.dismiss();
 
                                 customDialog = new CustomDialog(parent.getContext(), "획득!", titleArr[position] + "을 획득하셨습니다!", new View.OnClickListener() {
@@ -162,9 +149,12 @@ public class ShopFragment extends Fragment {
 
     }
 
-
-
-
+    @Override
+    public void onBack() {
+        getFragmentManager().beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit();
+        MainActivity activity = (MainActivity)getActivity();
+        activity.setOnBackPressedListener(null);
+    }
 
 
 }

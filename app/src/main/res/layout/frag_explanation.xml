@@ -14,11 +14,12 @@
         android:layout_marginTop="15dp">
 
         <ImageView
+            android:id="@+id/fragexplanation_speechBubbleIv"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:translationZ="-1dp"
             android:layout_alignParentTop="true"
-            android:src="@drawable/lab_speech_bubble"/>
+            />
         <TextView
             android:id="@+id/fragExplanation_story"
             android:layout_width="wrap_content"
@@ -36,9 +37,7 @@
         android:layout_below="@id/fragExplanation_storyRelative"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:layout_marginTop="-15dp"
-        android:src="@drawable/lab_doctor"/>
-
+        android:layout_marginTop="-15dp"/>
     <RelativeLayout
         android:layout_below="@id/fragExplanation_lab_doctor"
         android:layout_width="match_parent"
@@ -48,18 +47,14 @@
         android:paddingTop="50dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-
         android:background="@drawable/lab_box">
 
-       <ImageView
-           android:id="@+id/fragExplanation_collection"
-           android:layout_width="110dp"
-           android:layout_marginTop="15dp"
-           android:layout_height="80dp"
-
-           android:textColor="#000"
-           android:layout_alignParentLeft="true"
-           android:src="@drawable/book"/>
+        <ImageView
+            android:id="@+id/fragExplanation_collection"
+            android:layout_width="110dp"
+            android:layout_marginTop="15dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:layout_below="@id/fragExplanation_collection"
@@ -78,7 +73,6 @@
             android:id="@+id/fragExplanation_dictionary"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/book_dictionary"
             android:layout_alignParentRight="true"/>
 
         <TextView
@@ -94,9 +88,5 @@
             android:text="수집글\n사전"
             />
     </RelativeLayout>
-
-
-
-
 
 </RelativeLayout>

@@ -24,11 +24,8 @@ public class CustomDialog extends Dialog {
     private String mContent;
 
 
-
     private View.OnClickListener mLeftClickListener;
     private View.OnClickListener mRightClickListener;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

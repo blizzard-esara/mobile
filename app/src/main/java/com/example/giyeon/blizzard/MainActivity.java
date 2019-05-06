@@ -1,21 +1,16 @@
 package com.example.giyeon.blizzard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,40 +21,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.giyeon.blizzard.user.controller.CommonController;
-import com.example.giyeon.blizzard.user.controller.UserController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
-import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
-import com.example.giyeon.blizzard.user.dto.UserData;
-import com.example.giyeon.blizzard.user.view.MonsterChoiseActivity;
+import com.example.giyeon.blizzard.user.dto.SimpleData;
 import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
-import com.example.giyeon.blizzard.user.view.frag.FragFragEgg1;
-import com.example.giyeon.blizzard.user.view.frag.FragFragEgg2;
-import com.example.giyeon.blizzard.user.view.frag.FragFragEgg3;
-import com.example.giyeon.blizzard.user.view.frag.MainAdvantureFragment;
-import com.example.giyeon.blizzard.user.view.frag.MainFragment;
-import com.example.giyeon.blizzard.user.view.frag.OverwatchQuesFragment;
+import com.example.giyeon.blizzard.user.view.frag.MainQuizeFragment;
+import com.example.giyeon.blizzard.user.view.frag.MainEggManageFragment;
 import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
-import com.example.giyeon.blizzard.user.view.frag.StarcraftQuesFragment;
 
-import org.w3c.dom.Text;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    public interface OnBackPressedListener {
+        void onBack();
+    }
+
+    private OnBackPressedListener mBackListener;
+
+    public void setOnBackPressedListener(OnBackPressedListener listener) {
+        mBackListener = listener;
+    }
 
     Context context;
     /** Header Menu **/
@@ -106,8 +94,7 @@ public class MainActivity extends AppCompatActivity
         //fragment Setting
         manager = setManager();
 
-        MainFragment.getInstance().setContext(context);
-        manager.beginTransaction().replace(R.id.content_main, MainFragment.getInstance()).commit();
+        manager.beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit();
 
     }
 
@@ -117,7 +104,25 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(mBackListener !=null) {
+                mBackListener.onBack();
+            } else {
+                if(SimpleData.getInstance().backPressedTime == 0) {
+                    Toast.makeText(context, "한번더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                    SimpleData.getInstance().backPressedTime = System.currentTimeMillis() - SimpleData.getInstance().backPressedTime;
+                } else {
+                    int seconds = (int) (System.currentTimeMillis() - SimpleData.getInstance().backPressedTime);
+
+                    if(seconds > 2000) {
+                        Toast.makeText(context, "한번더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                        SimpleData.getInstance().backPressedTime = 0;
+                    } else {
+                        super.onBackPressed();
+                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                }
+            }
         }
     }
 
@@ -159,40 +164,16 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.mainAdventure){
-            MainAdvantureFragment.getInstance().setContext(context);
-            manager.beginTransaction().replace(R.id.content_main, MainAdvantureFragment.getInstance()).commit();
+            manager.beginTransaction().replace(R.id.content_main, new MainQuizeFragment()).commit();
 
         } else if (id == R.id.userInfo) {
             Toast.makeText(context, " friens fragment 미구현", Toast.LENGTH_SHORT).show(); // must modification
         } else if( id == R.id.explanation) {
-            ExplanationFragment.getInstance().setContext(context);
-            manager.beginTransaction().replace(R.id.content_main, ExplanationFragment.getInstance()).commit();
+            manager.beginTransaction().replace(R.id.content_main, new ExplanationFragment()).commit();
         } else if( id == R.id.shop) {
-            manager.beginTransaction().replace(R.id.content_main, ShopFragment.getInstance()).commit();
+            manager.beginTransaction().replace(R.id.content_main, new ShopFragment()).commit();
         }
-        /*
-        else if( id == R.id.starCraftQuize) {
 
-            StarcraftQuesFragment.getInstance().setContext(context);
-            manager.beginTransaction().replace(R.id.content_main, StarcraftQuesFragment.getInstance()).commit();
-
-        } else if(id == R.id.overWatchQuize) {
-
-            OverwatchQuesFragment.getInstance().setContext(context);
-            manager.beginTransaction().replace(R.id.content_main, OverwatchQuesFragment.getInstance()).commit();
-
-        } else if(id == R.id.diabloQuize) {
-            customDialog = new CustomDialog(context, "! 준비중", "준비중인 컨텐츠 입니다.",
-                    new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            customDialog.dismiss();
-                        }
-                    });
-            customDialog.show();
-        }
-        */
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -245,7 +226,7 @@ public class MainActivity extends AppCompatActivity
         navHeaderContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                manager.beginTransaction().replace(R.id.content_main, MainFragment.getInstance()).commit();
+                manager.beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
             }
@@ -254,7 +235,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
 
 
     private void applyFontToMenuItem(MenuItem mi, boolean ko) {

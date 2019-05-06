@@ -1,8 +1,6 @@
 package com.example.giyeon.blizzard.user.controller;
 
-import android.util.Log;
-
-import com.example.giyeon.blizzard.user.dto.MonsterData;
+import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 import com.example.giyeon.blizzard.user.model.NetworkTask;
@@ -13,25 +11,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.spec.ECField;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class UserController {
+public class NetworkController {
 
 
     private NetworkTask networkTask;
 
-    private UserController() {
+    private NetworkController() {
 
     }
 
     private static class LazyHolder {
-        public static final UserController INSTANCE = new UserController();
+        public static final NetworkController INSTANCE = new NetworkController();
     }
-    public static UserController getInstance() {
+    public static NetworkController getInstance() {
         return LazyHolder.INSTANCE;
     }
 
@@ -130,9 +126,9 @@ public class UserController {
                     if(jsonArray.length() == 1) {
 
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        MonsterData.getInstance().setMainMonster(jsonObject.get("monster").toString());
-                        MonsterData.getInstance().setExp(Integer.parseInt(jsonObject.get("exp").toString()));
-                        MonsterData.getInstance().setLevel(Integer.parseInt(jsonObject.get("level").toString()));
+                        EggData.getInstance().setMainEgg(jsonObject.get("monster").toString());
+                        EggData.getInstance().setMainExp(Integer.parseInt(jsonObject.get("exp").toString()));
+                        EggData.getInstance().setMainLevel(Integer.parseInt(jsonObject.get("level").toString()));
 
                         returnInt = 1;
                     }
@@ -174,7 +170,7 @@ public class UserController {
                 "id="+id+"&mainMonster="+mainMonster);
         try {
             result = networkTask.execute().get();
-            MonsterData.getInstance().setMonsterUrl(result);
+            EggData.getInstance().setMainUrl(result);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -236,12 +232,12 @@ public class UserController {
     private void jsonConvertToList(String result) {
         Gson gson = new Gson();
         List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
-        MonsterData.getInstance().setMonsterList(monsterList);
+        EggData.getInstance().setMonsterList(monsterList);
 
         for(int i = 0 ; i < monsterList.size() ; i++) {
             monsterList.get(i).put("url",SimpleData.getInstance().getImageUrl()+
                     mainMonsterImageURL(UserData.getInstance().getId(),
-                    MonsterData.getInstance().getMonsterList().get(i).get("monster").toString()
+                    EggData.getInstance().getMonsterList().get(i).get("monster").toString()
             ));
         }
 

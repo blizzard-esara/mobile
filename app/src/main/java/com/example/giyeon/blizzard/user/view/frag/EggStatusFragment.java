@@ -2,12 +2,10 @@ package com.example.giyeon.blizzard.user.view.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
+import com.example.giyeon.blizzard.user.OnBackPressedListener;
 import com.example.giyeon.blizzard.user.controller.CommonController;
-import com.example.giyeon.blizzard.user.controller.CommonEvent;
-import com.example.giyeon.blizzard.user.dto.MonsterData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
 import java.util.Map;
 
 @SuppressLint("ValidFragment")
-public class FragFragEgg1 extends Fragment {
+public class EggStatusFragment extends Fragment {
 
     private Map<String, Object> monsterData;
     private View view;
@@ -47,7 +42,7 @@ public class FragFragEgg1 extends Fragment {
     private Button produceInfoBtn;
 
     @SuppressLint("ValidFragment")
-    public FragFragEgg1(Map<String, Object> monsterData) {
+    public EggStatusFragment(Map<String, Object> monsterData) {
         this.monsterData = monsterData;
     }
 
@@ -55,9 +50,8 @@ public class FragFragEgg1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frag_frag_egg1, container, false);
+        view = inflater.inflate(R.layout.frag_egg_status, container, false);
 
-        //monsterData =
         setView();
         setContent();
         Glide.with(getParentFragment().getActivity()).load(monsterData.get("url").toString()).into(monsterEgg);
@@ -89,8 +83,6 @@ public class FragFragEgg1 extends Fragment {
                                                                                 monsterData.get("level").toString(),
                                                                                 monsterData.get("url").toString());
                 getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, eggDetailsFragment).commit();
-                //manager.beginTransaction().replace(R.id.content_main, MainQuizeFragment.getInstance()).commit();
-
             }
         });
     }
@@ -105,26 +97,21 @@ public class FragFragEgg1 extends Fragment {
         explanationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                CommonEvent.getInstance().mainThreeBtnEvent("explanation", monsterData, getParentFragment().getFragmentManager());
-
-
+                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, new ExplanationFragment()).commit();
             }
         });
 
         adventureStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                CommonEvent.getInstance().mainThreeBtnEvent("adventure", monsterData, getParentFragment().getFragmentManager());
+                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, new MainQuizeFragment()).commit();
             }
         });
 
         produceInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonEvent.getInstance().mainThreeBtnEvent("shop", monsterData, getParentFragment().getFragmentManager());
+                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, new ShopFragment()).commit();
             }
         });
     }

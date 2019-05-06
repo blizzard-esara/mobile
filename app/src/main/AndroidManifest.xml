@@ -28,7 +28,6 @@
         <activity android:name=".user.view.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".user.view.InitalActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".user.view.MonsterChoiseActivity" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

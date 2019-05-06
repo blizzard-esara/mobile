@@ -16,12 +16,12 @@ import com.example.giyeon.blizzard.user.dto.SimpleData;
 import java.util.List;
 import java.util.Map;
 
-public class CustomCollectionGridAdapter extends BaseAdapter {
+public class CollectionGridAdapter extends BaseAdapter {
 
     Context context;
     List<Map<String, Object>> mapList;
 
-    public CustomCollectionGridAdapter (Context context, List<Map<String, Object>> mapList) {
+    public CollectionGridAdapter(Context context, List<Map<String, Object>> mapList) {
         this.context = context;
         this.mapList = mapList;
     }

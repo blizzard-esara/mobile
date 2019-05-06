@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.giyeon.blizzard.R;
 
-import org.w3c.dom.Text;
 
 public class CustomShopDialog extends Dialog {
 
@@ -29,10 +28,6 @@ public class CustomShopDialog extends Dialog {
     private int imageResource;
     private String eggNameResource;
     private int eggPriceResource;
-
-    public CustomShopDialog(Context context, int themeResId) {
-        super(context, themeResId);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giyeon.blizzard.R;
-import com.example.giyeon.blizzard.user.controller.UserController;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -104,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(idTxt.getText().toString().equals("")) {
                     Toast.makeText(context, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(UserController.getInstance().checkOverlapId(idTxt.getText().toString())) {
+                    if(NetworkController.getInstance().checkOverlapId(idTxt.getText().toString())) {
                         idCheckTv.setText("사용가능한 아이디 입니다.");
                         idCheckTv.setTextColor(Color.parseColor("#00a721"));
                         boolId = true;
@@ -140,7 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                     checkedRadioBtn = (RadioButton)findViewById(genderRadio.getCheckedRadioButtonId());
 
-                                   if(UserController.getInstance().signUp(idTxt.getText().toString(),
+                                   if(NetworkController.getInstance().signUp(idTxt.getText().toString(),
                                                                         pwTxt.getText().toString(),
                                                                         emailTxt.getText().toString(),
                                                                         phone1.getText().toString()+"-"+phone2.getText().toString()+"-"+phone3.getText().toString(),
