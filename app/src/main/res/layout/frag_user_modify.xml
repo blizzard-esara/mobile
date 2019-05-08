@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/quiz_background">
+
+    <ImageView
+        android:id="@+id/modify_topImage"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/profile_man"/>
+    <RelativeLayout
+        android:id="@+id/modify_topboxRelative"
+        android:layout_below="@id/modify_topImage"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/profile_box">
+<!-- ID -->
+        <LinearLayout
+            android:id="@+id/modify_idLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID : "
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_userId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="UserId"
+                android:enabled="false"
+                android:background="@null" />
+
+        </LinearLayout>
+<!--Email -->
+        <LinearLayout
+            android:id="@+id/modify_emailLinear"
+            android:layout_below="@id/modify_idLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email : "
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="giyeon15@gmail.com"
+                android:enabled="false"
+                android:background="@null" />
+        </LinearLayout>
+
+        <!--Phone -->
+        <LinearLayout
+            android:id="@+id/modify_phoneLinear"
+            android:layout_below="@id/modify_emailLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone : "
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_phone1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="010"
+                android:maxLength="3"
+                android:enabled="false"
+                android:background="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_phone2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="9434"
+                android:maxLength="4"
+                android:enabled="false"
+                android:background="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_phone3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="7521"
+                android:maxLength="4"
+                android:enabled="false"
+                android:background="@null" />
+        </LinearLayout>
+
+        <!--Age -->
+        <LinearLayout
+            android:id="@+id/modify_ageLinear"
+            android:layout_below="@id/modify_phoneLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age : "
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/modify_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="25"
+                android:maxLength="2"
+                android:enabled="false"
+                android:background="@null" />
+        </LinearLayout>
+
+        <!--Gender -->
+        <LinearLayout
+            android:id="@+id/modify_genderLinear"
+            android:layout_below="@id/modify_ageLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender : "
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:textSize="20sp"/>
+
+            <!-- 수정 필요-->
+            <EditText
+                android:id="@+id/modify_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="Male"
+                android:enabled="false"
+                android:background="@null" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/modify_genderLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/profile_change"
+                android:textColor="#fff"
+                android:fontFamily="@font/pfstardust"
+                android:text="수정하기"/>
+        </LinearLayout>
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/modify_topboxRelative"
+
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/profile_box_small"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp">
+
+        <!--모험일수-->
+        <LinearLayout
+            android:id="@+id/modify_dateLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모험일수 : +"
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/modify_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:text="73"/>
+        </LinearLayout>
+
+        <!--부화시킨 알의 수-->
+        <LinearLayout
+            android:id="@+id/modify_eggCountLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/modify_dateLinear"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="부화시킨 알 : "
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/modify_eggCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:text="5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="개"/>
+        </LinearLayout>
+
+
+        <!--칭호-->
+        <LinearLayout
+            android:id="@+id/modify_aliasLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/modify_eggCountLinear"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="칭호 : "
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/modify_alias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:text="SCV"/>
+        </LinearLayout>
+
+        <!--모험완료-->
+        <LinearLayout
+            android:id="@+id/modify_quizCountLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/modify_aliasLinear"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모험완료 : "
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/modify_quizCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:text="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:fontFamily="@font/shylock_nbp"
+                android:text="번"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/profile_team_ysera_logo_white"/>
+
+</RelativeLayout>

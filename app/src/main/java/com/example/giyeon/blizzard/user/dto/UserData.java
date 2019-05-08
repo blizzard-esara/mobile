@@ -7,6 +7,7 @@ public class UserData {
     private String gender;
     private String age;
     private int money;
+    private String date;
 
 
 
@@ -52,6 +53,14 @@ public class UserData {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     private static class LazyHolder {

@@ -7,7 +7,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mainAdventure"
-            android:icon="@drawable/tmpicon"
+            android:icon="@drawable/quiz_icon"
             android:title="모험하기" />
 
         <item

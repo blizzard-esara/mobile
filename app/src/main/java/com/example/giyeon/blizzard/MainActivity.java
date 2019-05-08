@@ -32,6 +32,7 @@ import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainQuizeFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainEggManageFragment;
 import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
+import com.example.giyeon.blizzard.user.view.frag.UserModifyFragment;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity
             manager.beginTransaction().replace(R.id.content_main, new MainQuizeFragment()).commit();
 
         } else if (id == R.id.userInfo) {
-            Toast.makeText(context, " friens fragment 미구현", Toast.LENGTH_SHORT).show(); // must modification
+            manager.beginTransaction().replace(R.id.content_main, new UserModifyFragment()).commit();
         } else if( id == R.id.explanation) {
             manager.beginTransaction().replace(R.id.content_main, new ExplanationFragment()).commit();
         } else if( id == R.id.shop) {

@@ -1,5 +1,7 @@
 package com.example.giyeon.blizzard.user.controller;
 
+import android.util.Log;
+
 import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 import com.example.giyeon.blizzard.user.dto.UserData;
@@ -90,6 +92,7 @@ public class NetworkController {
                 UserData.getInstance().setGender(jsonObject.get("gender").toString());
                 UserData.getInstance().setAge(jsonObject.get("age").toString());
                 UserData.getInstance().setMoney(Integer.parseInt(jsonObject.get("money").toString()));
+                UserData.getInstance().setDate(jsonObject.get("date").toString());
                 loginCheck = true;
             }
 
