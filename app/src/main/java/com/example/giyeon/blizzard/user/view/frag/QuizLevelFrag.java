@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
+import com.example.giyeon.blizzard.user.custom.CustomDialog;
 
 @SuppressLint("ValidFragment")
 public class QuizLevelFrag extends Fragment implements MainActivity.OnBackPressedListener {
@@ -25,6 +28,7 @@ public class QuizLevelFrag extends Fragment implements MainActivity.OnBackPresse
     private String word;
     private RelativeLayout easy;
     private RelativeLayout hard;
+    private CustomDialog customDialog;
 
 
     @SuppressLint("ValidFragment")
@@ -71,11 +75,30 @@ public class QuizLevelFrag extends Fragment implements MainActivity.OnBackPresse
     }
 
     public void setContent() {
+
+        customDialog = new CustomDialog(getContext(), "! 알림","문제를 다푸셨습니다.\n다음 업데이트를 기대해주세요.", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialog.dismiss();
+            }
+        });
+
+
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommonController cc = CommonController.getInstance();
+
+                cc.setQuizList(NetworkController.getInstance().quizList(kind, "easy"));
+
+
+                if(cc.getQuizList().isEmpty()) {
+                    customDialog.show();
+                } else {
+                    getFragmentManager().beginTransaction().replace(R.id.content_main, new QuizContentFrag(cc.getQuizList().get(0))).commit();
+                }
                 //문제 시작 경험치 문제당 20
-                //getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, new ExplanationFragment()).commit();
+                //getFragmentManager().beginTransaction().replace(R.id.content_main, new ExplanationFragment()).commit();
             }
         });
 

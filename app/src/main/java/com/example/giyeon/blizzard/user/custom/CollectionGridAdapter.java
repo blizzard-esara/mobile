@@ -49,6 +49,7 @@ public class CollectionGridAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.gridview_item_collection, parent, false);
         }
 
+
         ImageView imageView = (ImageView)view.findViewById(R.id.collection_item_imageView);
         TextView textView = (TextView)view.findViewById(R.id.collection_item_text);
 

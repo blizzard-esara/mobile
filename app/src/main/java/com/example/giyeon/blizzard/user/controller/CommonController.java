@@ -2,6 +2,7 @@ package com.example.giyeon.blizzard.user.controller;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -21,6 +22,9 @@ import android.widget.TextView;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.custom.StoryHandler;
+import com.example.giyeon.blizzard.user.dto.Quiz;
+
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -32,12 +36,31 @@ public class CommonController {
     private StoryHandler handler;
     private Animation removeAnimation;
     private Thread t;
+    private Thread checkActivity;
     private Message msg;
+    private List<Quiz> quizList;
+    public boolean checkActivityBoolean = true;
 
 
 
     private CommonController() {
 
+    }
+
+    public Thread getT() {
+        return t;
+    }
+
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
+    }
+
+    public Thread getCheckActivity() {
+        return checkActivity;
     }
 
     private static class LazyHolder {
@@ -47,6 +70,27 @@ public class CommonController {
         return LazyHolder.INSTANCE;
     }
 
+
+    public void checkActivityThreadStart() {
+        checkActivity = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                while (checkActivityBoolean) {
+                    Log.e("teststs", "ㅅ례드 실행중 ....");
+
+                    Thread.sleep(1000);
+                }
+                    } catch (InterruptedException e) {
+                        Log.e("teststs","INTERRUPT!!!");
+                        checkActivityBoolean = false;
+                        e.printStackTrace();
+                    }
+
+            }
+        });
+        checkActivity.start();
+    }
 
     public void threadStart(TextView storyText, String word) {
         final String finalWord = word;
@@ -117,9 +161,6 @@ public class CommonController {
                 .build()
         );
     }
-
-
-
 
 
 

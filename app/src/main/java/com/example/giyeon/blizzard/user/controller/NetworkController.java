@@ -3,6 +3,8 @@ package com.example.giyeon.blizzard.user.controller;
 import android.util.Log;
 
 import com.example.giyeon.blizzard.user.dto.EggData;
+import com.example.giyeon.blizzard.user.dto.Explanation;
+import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 import com.example.giyeon.blizzard.user.model.NetworkTask;
@@ -13,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -93,6 +96,7 @@ public class NetworkController {
                 UserData.getInstance().setAge(jsonObject.get("age").toString());
                 UserData.getInstance().setMoney(Integer.parseInt(jsonObject.get("money").toString()));
                 UserData.getInstance().setDate(jsonObject.get("date").toString());
+                UserData.getInstance().setEmail(jsonObject.get("email").toString());
                 loginCheck = true;
             }
 
@@ -120,8 +124,8 @@ public class NetworkController {
                 } else {
 
 
-                    jsonConvertToList(result);
-
+                    List<Map<String, Object>> monsterList = jsonConvertToList(result);
+                    setUrl(monsterList);
 
                     JSONArray jsonArray = new JSONArray(result);
                     returnInt = jsonArray.length();
@@ -202,7 +206,11 @@ public class NetworkController {
         try {
             result = networkTask.execute().get();
 
-            jsonConvertToList(result);
+;
+
+            List<Map<String, Object>> monsterList = jsonConvertToList(result);
+            setUrl(monsterList);
+
 
             UserData.getInstance().setMoney(UserData.getInstance().getMoney() - price);
         } catch (InterruptedException e) {
@@ -226,23 +234,113 @@ public class NetworkController {
             e.printStackTrace();
         }
 
-        Gson gson = new Gson();
-        collectionList = gson.fromJson(result, new TypeToken<List<Map<String, Object>>>(){}.getType());
+        collectionList = jsonConvertToList(result);
 
         return collectionList;
     }
 
-    private void jsonConvertToList(String result) {
+    public int monsterCount() {
+        String result = "";
+        double monsterAllCount = 0;
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/monsterCount",
+                                        "id="+UserData.getInstance().getId());
+        try {
+            result = networkTask.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        List<Map<String, Object>> monsterC = jsonConvertToList(result);
+        for(int i= 0 ; i < monsterC.size() ; i++) {
+            //monsterC.get(i).get("monster_type"); a몬스터 종류별 개수뽑을떄 이름 가져오기
+
+             monsterAllCount += Double.valueOf(monsterC.get(i).get("cnt").toString());
+        }
+
+        return (int)monsterAllCount;
+    }
+
+    public void modifyUser(String email,String phone) {
+
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/modifyUser",
+                "id="+UserData.getInstance().getId()+"&email="+email+"&phone="+phone);
+
+        UserData.getInstance().setEmail(email);
+        UserData.getInstance().setPhone(phone);
+    }
+
+    public List<Explanation> explanationList() {
+
+        String result = "";
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl() + "/explanationList",
+                "id=" + UserData.getInstance().getId());
+
+        try {
+            result = networkTask.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         Gson gson = new Gson();
-        List<Map<String, Object>> monsterList = gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
+        return gson.fromJson(result, new TypeToken<List<Explanation>>() {}.getType());
+    }
+
+    public List<Quiz> quizList(String theme, String level) {
+        String result = "";
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/getQuizList",
+                "id="+UserData.getInstance().getId()+"&theme="+theme+"&level="+level);
+        try {
+            result = networkTask.execute().get();
+            Log.e("network",result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if(result.equals("[]")) {
+            return new ArrayList<Quiz>();
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(result, new TypeToken<List<Quiz>>() {}.getType());
+    }
+
+    public Explanation explanationShow(int col) {
+        String result = "";
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/explanationShow",
+                                        "id="+UserData.getInstance().getId()+"&col="+col);
+
+        try {
+            result = networkTask.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        return gson.fromJson(result, new TypeToken<Explanation>(){}.getType());
+    }
+
+
+    private List<Map<String, Object>> jsonConvertToList(String result) {
+        Gson gson = new Gson();
+        return gson.fromJson(result, new TypeToken<List<Map<String,Object>>>(){}.getType());
+    }
+
+    private void setUrl(List<Map<String, Object>> monsterList) {
         EggData.getInstance().setMonsterList(monsterList);
 
         for(int i = 0 ; i < monsterList.size() ; i++) {
             monsterList.get(i).put("url",SimpleData.getInstance().getImageUrl()+
                     mainMonsterImageURL(UserData.getInstance().getId(),
-                    EggData.getInstance().getMonsterList().get(i).get("monster").toString()
-            ));
+                            EggData.getInstance().getMonsterList().get(i).get("monster").toString()
+                    ));
         }
-
     }
 }

@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/book_topImage"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/collection_doctor"/>
+
+    <RelativeLayout
+        android:id="@+id/book_topRelative"
+        android:layout_width="250dp"
+        android:layout_height="140dp"
+        android:paddingRight="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/shop_speechbubble"
+            />
+
+        <TextView
+            android:id="@+id/book_storyTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="65dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="80dp"
+            android:fontFamily="@font/pfstardust"
+            android:textColor="#000"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:lineSpacingExtra="7sp"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+    <ListView
+        android:layout_below="@id/book_topImage"
+        android:id="@+id/book_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+</RelativeLayout>

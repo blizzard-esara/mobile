@@ -2,24 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="350dp"
         android:layout_height="600dp"
-        android:background="@drawable/tmp_answer_f"
+        android:background="@drawable/quiz_answer_frame"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:gravity="center">
+            android:layout_height="510dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/answerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TiTLE"
+                android:fontFamily="@font/pfstardust"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
             <android.support.v4.view.ViewPager
-                android:id="@+id/answer_vpPager"
-                android:layout_width="300dp"
-                android:layout_height="200dp" />
+                android:id="@+id/answerImage_vpPager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <com.example.giyeon.blizzard.user.custom.CustomIndicator
+                android:id="@+id/answerImage_customIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/answerContents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+
+                android:textColor="#000"
+                android:fontFamily="@font/pfstardust"
+                android:lineSpacingExtra="7dp" />
+
+            </ScrollView>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,10 +75,11 @@
             android:layout_height="50dp"
             android:gravity="center">
             <ImageButton
-                android:id="@+id/answerDialog_answerBtn"
+                android:id="@+id/answerImage_answerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/quiz_keep_go"
+                android:visibility="invisible"
                 />
 
             <TextView
@@ -49,6 +90,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:fontFamily="@font/pfstardust"
+                android:visibility="invisible"
                 />
 
         </RelativeLayout>

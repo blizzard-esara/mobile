@@ -74,6 +74,14 @@ public class ExplanationFragment extends Fragment  implements MainActivity.OnBac
                 getFragmentManager().beginTransaction().replace(R.id.content_main, new CollectionFragment()).commit();
             }
         });
+
+        book_dictionary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonController.getInstance().threadStop();
+                getFragmentManager().beginTransaction().replace(R.id.content_main, new BookFragment()).commit();
+            }
+        });
     }
 
     @Override

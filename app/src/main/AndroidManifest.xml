@@ -28,6 +28,8 @@
         <activity android:name=".user.view.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".user.view.InitalActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".user.view.ExplanationImageActivity" android:theme="@style/Transparent"/>
+        <activity android:name=".user.view.ExplanationVideoActivity" android:theme="@style/Transparent"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

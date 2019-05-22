@@ -1,16 +1,19 @@
 package com.example.giyeon.blizzard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,17 +30,27 @@ import android.widget.Toast;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
+import com.example.giyeon.blizzard.user.dto.Explanation;
+import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
+import com.example.giyeon.blizzard.user.view.ExplanationImageActivity;
+import com.example.giyeon.blizzard.user.view.ExplanationVideoActivity;
 import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainQuizeFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainEggManageFragment;
+import com.example.giyeon.blizzard.user.view.frag.QuizContentFrag;
 import com.example.giyeon.blizzard.user.view.frag.ShopFragment;
 import com.example.giyeon.blizzard.user.view.frag.UserModifyFragment;
+
+import java.io.Serializable;
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
 
 
     public interface OnBackPressedListener {
@@ -56,10 +69,12 @@ public class MainActivity extends AppCompatActivity
 
     View navHeaderView;
     CustomDialog customDialog;
-
+    ActionBarDrawerToggle toggle;
+    
     /** Fragment Setting**/
     FragmentManager manager;
 
+    int nextquiz;
 
 
     @Override
@@ -80,11 +95,12 @@ public class MainActivity extends AppCompatActivity
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+       
         setSystem();
 
         //myMethod
@@ -180,6 +196,86 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void showExplanation(Explanation explanation, String layout, int nextLayout) {
+        Intent intent = null;
+        if(explanation.getAttrType().equals("image")) {
+            intent = new Intent(this, ExplanationImageActivity.class);
+            if(nextLayout == -1) {
+                //마지막
+            } else {
+
+            }
+
+        } else if (explanation.getAttrType().equals("video")) {
+            intent = new Intent(this, ExplanationVideoActivity.class);
+        }
+
+        nextquiz = nextLayout;
+        intent.putExtra("layout",layout);
+        intent.putExtra("explanation", explanation);
+        startActivity(intent);
+        overridePendingTransition(R.anim.intent_ani,R.anim.move_down);
+
+        CommonController.getInstance().checkActivityBoolean = true;
+        CommonController.getInstance().checkActivityThreadStart();
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    CommonController.getInstance().getCheckActivity().join();
+                    Log.e("dssadadadada","JOIN 구문 발생!");
+
+                Handler mHandler = new Handler(Looper.getMainLooper());
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Log.e("dssadadadada","Handler! 발생!");
+
+                        List<Quiz> quiz = CommonController.getInstance().getQuizList();
+                        for(int i = 0 ; i< quiz.size() ; i++) {
+                            if(nextquiz == quiz.get(i).getCol()) {
+                                manager.beginTransaction().replace(R.id.content_main, new QuizContentFrag(quiz.get(i))).commit();
+                                break;
+                            }
+                        }
+                    }
+                },100);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+
+
+    }
+
+    public void showExplanation(Explanation explanation, String layout) {
+        Intent intent = null;
+        if(explanation.getAttrType().equals("image")) {
+           intent = new Intent(this, ExplanationImageActivity.class);
+        } else if (explanation.getAttrType().equals("video")) {
+            intent = new Intent(this, ExplanationVideoActivity.class);
+        }
+
+        intent.putExtra("layout",layout);
+        intent.putExtra("explanation", explanation);
+        startActivity(intent);
+        overridePendingTransition(R.anim.intent_ani,R.anim.move_down);
+    }
+    
+    public void setToggleFalse() {
+        toggle.setDrawerIndicatorEnabled(false);
+    }
+
+    public void setToggleTrue() {
+        toggle.setDrawerIndicatorEnabled(true);
+    }
+
     private FragmentManager setManager() {
         return getSupportFragmentManager();
     }
@@ -251,7 +347,7 @@ public class MainActivity extends AppCompatActivity
         mi.setTitle(mNewTitle);
     }
 
-
+    
 
 }
 

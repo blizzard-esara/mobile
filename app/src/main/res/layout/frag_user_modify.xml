@@ -40,7 +40,6 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="UserId"
                 android:enabled="false"
                 android:background="@null" />
 
@@ -68,7 +67,7 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="giyeon15@gmail.com"
+                android:maxLength="29"
                 android:enabled="false"
                 android:background="@null" />
         </LinearLayout>
@@ -96,7 +95,6 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="010"
                 android:maxLength="3"
                 android:enabled="false"
                 android:background="@null" />
@@ -116,8 +114,8 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="9434"
                 android:maxLength="4"
+                android:inputType="number"
                 android:enabled="false"
                 android:background="@null" />
 
@@ -136,7 +134,7 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="7521"
+                android:inputType="number"
                 android:maxLength="4"
                 android:enabled="false"
                 android:background="@null" />
@@ -165,7 +163,6 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="25"
                 android:maxLength="2"
                 android:enabled="false"
                 android:background="@null" />
@@ -195,7 +192,6 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:fontFamily="@font/shylock_nbp"
-                android:text="Male"
                 android:enabled="false"
                 android:background="@null" />
         </LinearLayout>
@@ -207,6 +203,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center">
             <Button
+                android:id="@+id/modify_button"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:background="@drawable/profile_change"
@@ -248,7 +245,7 @@
                 android:textSize="18sp"
                 android:textColor="#000"
                 android:fontFamily="@font/pfstardust"
-                android:text="73"/>
+            />
         </LinearLayout>
 
         <!--부화시킨 알의 수-->

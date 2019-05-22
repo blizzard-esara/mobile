@@ -12,12 +12,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.giyeon.blizzard.R;
+import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.custom.CustomIndicator;
 import com.example.giyeon.blizzard.user.custom.ImagePageAdapter;
 import com.example.giyeon.blizzard.user.dto.Explanation;
 
 
-public class ExplanationActivity extends AppCompatActivity {
+public class ExplanationImageActivity extends AppCompatActivity {
 
     private ImageButton imageButton;
     private ViewPager viewPager;
@@ -26,6 +27,13 @@ public class ExplanationActivity extends AppCompatActivity {
     private TextView titleText;
     private TextView contentText;
 
+    String layout;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        CommonController.getInstance().getCheckActivity().interrupt();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +41,7 @@ public class ExplanationActivity extends AppCompatActivity {
         setContentView(R.layout.answer_image_activity);
 
         explanation = (Explanation) getIntent().getSerializableExtra("explanation");
+        layout = getIntent().getStringExtra("layout");
         imageButton = (ImageButton) findViewById(R.id.answerImage_answerBtn);
         viewPager = (ViewPager) findViewById(R.id.answerImage_vpPager);
         titleText = (TextView)findViewById(R.id.answerTitle);
@@ -41,7 +50,7 @@ public class ExplanationActivity extends AppCompatActivity {
         initCustomIndicator();
 
         titleText.setText(explanation.getTitle());
-        //contentText.setText(explanation.getContents());
+        contentText.setText(explanation.getContents());
 
         viewPager.setAdapter(new ImagePageAdapter(getSupportFragmentManager(), explanation.getUrl()));
 
