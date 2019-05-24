@@ -43,22 +43,16 @@ public class ExplanationVideoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(layout.equals("book")) {
             player.setPlayWhenReady(false);
             CommonController.backgroundSound = MediaPlayer.create(this, R.raw.main_song);
             CommonController.backgroundSound.setLooping(true);
             CommonController.backgroundSound.start();
-            finish();
-        } else if(layout.equals("quiz")) {
-            player.setPlayWhenReady(false);
-            CommonController.backgroundSound = MediaPlayer.create(this, R.raw.main_song);
-            CommonController.backgroundSound.setLooping(true);
-            CommonController.backgroundSound.start();
-            finish();
-            //
-        }
 
-
+            if(CommonController.getInstance().getCheckActivity() != null) {
+                if (CommonController.getInstance().getCheckActivity().isAlive())
+                    CommonController.getInstance().getCheckActivity().interrupt();
+            }
+            finish();
     }
 
     @Override

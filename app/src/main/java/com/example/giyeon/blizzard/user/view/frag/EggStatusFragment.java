@@ -20,6 +20,7 @@ import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.OnBackPressedListener;
 import com.example.giyeon.blizzard.user.controller.CommonController;
+import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.UserData;
 
 import java.util.Map;
@@ -88,6 +89,9 @@ public class EggStatusFragment extends Fragment {
     }
 
     public void setContent() {
+
+
+
         userId.setText(UserData.getInstance().getId());
         eggLevel.setText("알단계 : "+monsterData.get("level")+"단계");
         eggTypeTxt.setText("알타입 : "+monsterData.get("monster"));
@@ -104,6 +108,9 @@ public class EggStatusFragment extends Fragment {
         adventureStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EggData.getInstance().setMainEgg(monsterData.get("monster").toString());
+                EggData.getInstance().setMainExp(Integer.parseInt(monsterData.get("exp").toString()));
+                EggData.getInstance().setMainLevel(Integer.parseInt(monsterData.get("level").toString()));
                 getParentFragment().getFragmentManager().beginTransaction().replace(R.id.content_main, new MainQuizeFragment()).commit();
             }
         });

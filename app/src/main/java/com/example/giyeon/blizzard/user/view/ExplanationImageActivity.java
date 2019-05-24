@@ -27,12 +27,14 @@ public class ExplanationImageActivity extends AppCompatActivity {
     private TextView titleText;
     private TextView contentText;
 
-    String layout;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        CommonController.getInstance().getCheckActivity().interrupt();
+        if(CommonController.getInstance().getCheckActivity() != null) {
+            if(CommonController.getInstance().getCheckActivity().isAlive())
+                CommonController.getInstance().getCheckActivity().interrupt();
+        }
     }
 
     @Override
@@ -41,7 +43,6 @@ public class ExplanationImageActivity extends AppCompatActivity {
         setContentView(R.layout.answer_image_activity);
 
         explanation = (Explanation) getIntent().getSerializableExtra("explanation");
-        layout = getIntent().getStringExtra("layout");
         imageButton = (ImageButton) findViewById(R.id.answerImage_answerBtn);
         viewPager = (ViewPager) findViewById(R.id.answerImage_vpPager);
         titleText = (TextView)findViewById(R.id.answerTitle);

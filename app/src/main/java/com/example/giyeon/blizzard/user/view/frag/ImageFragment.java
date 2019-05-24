@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.giyeon.blizzard.R;
-import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 
 @SuppressLint("ValidFragment")
@@ -28,13 +27,21 @@ public class ImageFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_image, container, false);
+
+
         imageView = (ImageView)view.findViewById(R.id.fraglist_imageView);
         Glide.with(view).load(SimpleData.getInstance().getImageUrl()+imageUrl).into(imageView);
 
         return view;
     }
+
 }

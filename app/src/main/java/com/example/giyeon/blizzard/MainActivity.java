@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -196,22 +197,19 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void showExplanation(Explanation explanation, String layout, int nextLayout) {
+    public void showExplanation(Explanation explanation, int nextLayout) {
         Intent intent = null;
-        if(explanation.getAttrType().equals("image")) {
-            intent = new Intent(this, ExplanationImageActivity.class);
-            if(nextLayout == -1) {
-                //마지막
-            } else {
+        if(explanation.getAttrType() != null) {
+            if (explanation.getAttrType().equals("image")) {
+                intent = new Intent(this, ExplanationImageActivity.class);
 
+            } else if (explanation.getAttrType().equals("video")) {
+                intent = new Intent(this, ExplanationVideoActivity.class);
             }
-
-        } else if (explanation.getAttrType().equals("video")) {
-            intent = new Intent(this, ExplanationVideoActivity.class);
+        } else {
+            intent = new Intent(this, ExplanationImageActivity.class);
         }
-
         nextquiz = nextLayout;
-        intent.putExtra("layout",layout);
         intent.putExtra("explanation", explanation);
         startActivity(intent);
         overridePendingTransition(R.anim.intent_ani,R.anim.move_down);
@@ -223,26 +221,27 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 try {
-                    CommonController.getInstance().getCheckActivity().join();
-                    Log.e("dssadadadada","JOIN 구문 발생!");
+                    CommonController.getInstance().getCheckActivity().join(); //Explanation Exit Wait
 
-                Handler mHandler = new Handler(Looper.getMainLooper());
+                    Handler mHandler = new Handler(Looper.getMainLooper());
 
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Log.e("dssadadadada","Handler! 발생!");
+                            if(nextquiz == -1) { //Result 창
 
-                        List<Quiz> quiz = CommonController.getInstance().getQuizList();
-                        for(int i = 0 ; i< quiz.size() ; i++) {
-                            if(nextquiz == quiz.get(i).getCol()) {
-                                manager.beginTransaction().replace(R.id.content_main, new QuizContentFrag(quiz.get(i))).commit();
-                                break;
+                            } else {
+                                List<Quiz> quiz = CommonController.getInstance().getQuizList();
+                                for(int i = 0 ; i< quiz.size() ; i++) {
+                                    if(nextquiz == quiz.get(i).getCol()) {
+                                        manager.beginTransaction().replace(R.id.content_main, new QuizContentFrag(quiz.get(i))).commit();
+                                        break;
+                                    }
+                                }
                             }
                         }
-                    }
-                },100);
+                    },0);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -254,20 +253,23 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void showExplanation(Explanation explanation, String layout) {
+    public void showExplanation(Explanation explanation) {
         Intent intent = null;
-        if(explanation.getAttrType().equals("image")) {
-           intent = new Intent(this, ExplanationImageActivity.class);
-        } else if (explanation.getAttrType().equals("video")) {
-            intent = new Intent(this, ExplanationVideoActivity.class);
+        if(explanation.getAttrType() != null) {
+            if (explanation.getAttrType().equals("image")) {
+                intent = new Intent(this, ExplanationImageActivity.class);
+            } else if (explanation.getAttrType().equals("video")) {
+                intent = new Intent(this, ExplanationVideoActivity.class);
+            }
+        } else {
+            intent = new Intent(this, ExplanationImageActivity.class);
         }
 
-        intent.putExtra("layout",layout);
         intent.putExtra("explanation", explanation);
         startActivity(intent);
         overridePendingTransition(R.anim.intent_ani,R.anim.move_down);
     }
-    
+
     public void setToggleFalse() {
         toggle.setDrawerIndicatorEnabled(false);
     }
@@ -347,7 +349,7 @@ public class MainActivity extends AppCompatActivity
         mi.setTitle(mNewTitle);
     }
 
-    
+
 
 }
 

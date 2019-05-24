@@ -5,14 +5,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.giyeon.blizzard.R;
+import com.example.giyeon.blizzard.user.controller.NetworkController;
 import com.example.giyeon.blizzard.user.custom.CustomIndicator;
 import com.example.giyeon.blizzard.user.custom.SessionPageAdapter;
 import com.example.giyeon.blizzard.user.dto.EggData;
+import com.example.giyeon.blizzard.user.dto.SimpleData;
+import com.example.giyeon.blizzard.user.dto.UserData;
+import com.example.giyeon.blizzard.user.model.NetworkTask;
 
 public class MainEggManageFragment extends Fragment {
     private View view;
@@ -26,6 +31,7 @@ public class MainEggManageFragment extends Fragment {
         initCustomIndicator();
 
         vpPager = (ViewPager)view.findViewById(R.id.vpPager);
+        NetworkController.getInstance().initalCheck(UserData.getInstance().getId());
         vpPager.setAdapter(new SessionPageAdapter(getChildFragmentManager()));
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -15,6 +15,7 @@ import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
+import com.example.giyeon.blizzard.user.dto.SimpleData;
 
 public class MainQuizeFragment extends Fragment implements MainActivity.OnBackPressedListener {
     private View view;
@@ -37,7 +38,7 @@ public class MainQuizeFragment extends Fragment implements MainActivity.OnBackPr
         view = inflater.inflate(R.layout.frag_quiz_main, container, false);
         setView();
         setContent();
-
+        SimpleData.getInstance().setQuizExp(0);
         CommonController.getInstance().threadStop();
         CommonController.getInstance().threadStart(speakTv,word);
         return view;

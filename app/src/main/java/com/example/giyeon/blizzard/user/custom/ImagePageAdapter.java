@@ -1,5 +1,6 @@
 package com.example.giyeon.blizzard.user.custom;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,13 +16,17 @@ public class ImagePageAdapter extends FragmentPagerAdapter {
 
     public ImagePageAdapter(FragmentManager fm, List<String> urlList) {
         super(fm);
-
         this.urlList = urlList;
     }
 
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Override

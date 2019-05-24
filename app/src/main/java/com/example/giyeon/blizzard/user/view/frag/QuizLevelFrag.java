@@ -105,7 +105,20 @@ public class QuizLevelFrag extends Fragment implements MainActivity.OnBackPresse
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommonController cc = CommonController.getInstance();
 
+                cc.setQuizList(NetworkController.getInstance().quizList(kind, "hard"));
+
+
+                if(cc.getQuizList().isEmpty()) {
+                    customDialog.show();
+                } else {
+                    if(cc.getQuizList().get(0).getAttrType().equals("audio")) {
+                        getFragmentManager().beginTransaction().replace(R.id.content_main, new QuizContentAudioFrag(cc.getQuizList().get(0))).commit();
+                    } else {
+                        getFragmentManager().beginTransaction().replace(R.id.content_main, new QuizContentFrag(cc.getQuizList().get(0))).commit();
+                    }
+                }
             }
         });
     }

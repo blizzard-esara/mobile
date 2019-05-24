@@ -66,7 +66,7 @@ public class BookFragment extends Fragment implements MainActivity.OnBackPressed
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Explanation item = explanations.get(position);
                 if(item.isSolve()) {
-                    ((MainActivity)getContext()).showExplanation(item,"book");
+                    ((MainActivity)getContext()).showExplanation(item);
                 } else {
                     customDialog.show();
                 }

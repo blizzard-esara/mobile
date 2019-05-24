@@ -23,6 +23,7 @@ import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.custom.StoryHandler;
 import com.example.giyeon.blizzard.user.dto.Quiz;
+import com.example.giyeon.blizzard.user.dto.SimpleData;
 
 import java.util.List;
 
@@ -137,6 +138,15 @@ public class CommonController {
         obj2.setAnimation(removeAnimation);
         obj1.setVisibility(View.GONE);
         obj2.setVisibility(View.GONE);
+    }
+
+    public void expKeepAlgorithm(int col) {
+        for(int i = 0 ; i < getQuizList().size() ; i++) {
+            if(col == getQuizList().get(i).getCol()) {
+                int exp = SimpleData.getInstance().getQuizExp();
+                SimpleData.getInstance().setQuizExp(exp+(int)((20+i*2)*1.2));
+            }
+        }
     }
 
     public AnimatorSet setAnimator(ImageView obj, float sizeXY, int transX, int transY, int duration) {

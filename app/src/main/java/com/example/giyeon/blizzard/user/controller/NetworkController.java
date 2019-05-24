@@ -327,6 +327,27 @@ public class NetworkController {
         return gson.fromJson(result, new TypeToken<Explanation>(){}.getType());
     }
 
+    public Map<String, Object> expReflection(int getExp) {
+        String result = "";
+        String id = UserData.getInstance().getId();
+        String mainEgg = EggData.getInstance().getMainEgg();
+        int nowLv = EggData.getInstance().getMainLevel();
+        int nowExp = EggData.getInstance().getMainExp();
+
+        networkTask = new NetworkTask(SimpleData.getInstance().getUrl()+"/expReflection",
+                                        "id="+id+"&egg="+mainEgg+"&getExp="+getExp+"&nowExp="+nowExp+"&nowLv="+nowLv);
+
+        try {
+            result = networkTask.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(result, new TypeToken<Map<String, Object>>(){}.getType());
+    }
+
 
     private List<Map<String, Object>> jsonConvertToList(String result) {
         Gson gson = new Gson();
