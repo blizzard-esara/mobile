@@ -10,7 +10,7 @@
       android:id="@+id/quizmain_topRelative"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="50dp">
+      android:layout_marginTop="70dp">
 
       <ImageView
           android:id="@+id/mainAdventure_quize_trainnerIv"
@@ -83,7 +83,7 @@
         android:layout_below="@id/quizmain_overwatchRelative"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/quiz_start_box_starcraft">
 
         <ImageView
@@ -111,7 +111,7 @@
         android:layout_below="@id/quizmain_starCraftRelative"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/quiz_start_box_diablo">
 
         <ImageView

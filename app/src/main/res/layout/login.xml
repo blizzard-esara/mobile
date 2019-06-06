@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fff">
+    android:background="#fff"
+    android:gravity="center">
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp">
+        android:layout_gravity="center">
+
 
         <ImageView
             android:id="@+id/logoImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/logo_image"
             />
@@ -36,6 +37,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:inputType="textPassword"
                 android:fontFamily="@font/shylock_nbp"
                 android:hint="Password"/>
 
@@ -48,7 +50,7 @@
                     android:id="@+id/signUp"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:fontFamily="@font/pfstardust"
                     android:textColor="#081d39"
                     android:background="@drawable/button_frame"
@@ -59,7 +61,7 @@
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:fontFamily="@font/pfstardust"
                     android:textColor="#081d39"
                     android:background="@drawable/button_frame"
@@ -69,4 +71,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

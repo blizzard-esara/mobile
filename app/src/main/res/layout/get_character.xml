@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="320dp"
+        android:layout_height="500dp"
+        android:background="@drawable/get_character">
+
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="140dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/getCharacter_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"/>
+
+            <TextView
+                android:id="@+id/getCharacter_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="Asia"
+                android:textSize="15dp"
+                android:textColor="#000"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/getCharacter_mainBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginBottom="45dp"
+        android:text="확인"
+        android:textColor="#fff"
+        android:textSize="@dimen/px15"
+        android:fontFamily="@font/pfstardust"
+        android:background="@drawable/quiz_keep_go"
+        android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</RelativeLayout>

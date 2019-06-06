@@ -56,7 +56,7 @@ public class ExplanationFragment extends Fragment  implements MainActivity.OnBac
 
     public void setContent() {
         ImageView speechBubble = (ImageView)view.findViewById(R.id.fragexplanation_speechBubbleIv);
-        Glide.with(view).load(R.drawable.lab_speech_bubble).into(speechBubble);
+        Glide.with(view).load(R.drawable.lab_speech_bubble2).into(speechBubble);
 
         ImageView lab_doctor = (ImageView)view.findViewById(R.id.fragExplanation_lab_doctor);
         Glide.with(view).load(R.drawable.lab_doctor).into(lab_doctor);

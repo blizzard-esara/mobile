@@ -85,29 +85,35 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/storyText"
-        android:layout_below="@+id/imageLinear"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:translationZ="3dp"
-        android:paddingTop="30dp"
-        android:paddingRight="28dp"
-        android:paddingLeft="37dp"
-        android:textSize="18sp"
-        android:textColor="#000"
-        android:fontFamily="@font/pfstardust"
-        android:text=""/>
+        android:layout_below="@+id/imageLinear">
+
+        <ImageView
+            android:id="@+id/storyImageFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:translationZ="-1dp"
+            android:background="@drawable/quize_frame"/>
+
+        <TextView
+            android:id="@+id/storyText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="40dp"
+            android:textColor="#000"
+            android:gravity="center_vertical"
+            android:textSize="17dp"
+            android:lineSpacingExtra="10dp"
+            android:fontFamily="@font/pfstardust" />
+    </RelativeLayout>
 
 
-    <ImageView
-        android:id="@+id/storyImageFrame"
-        android:layout_below="@+id/imageLinear"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/quize_frame"/>
+
 
     <Button
         android:id="@+id/startGameBtn"

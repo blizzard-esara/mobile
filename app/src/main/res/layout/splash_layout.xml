@@ -4,4 +4,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash_image">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:textSize="12dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/shylock_nbp"
+        android:text="2019 CopyRight v2.3.1\nTeam Yesra RYD\nBlizzard, Korea Student AID Foundation"/>
+
 </RelativeLayout>

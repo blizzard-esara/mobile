@@ -2,6 +2,7 @@ package com.example.giyeon.blizzard.user.view.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,9 @@ import com.example.giyeon.blizzard.user.custom.TimerHandler;
 import com.example.giyeon.blizzard.user.dto.EggData;
 import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
+import com.example.giyeon.blizzard.user.view.GetCharacterActivity;
+
+import java.util.Map;
 
 @SuppressLint("ValidFragment")
 public class QuizContentFrag extends Fragment implements MainActivity.OnBackPressedListener {
@@ -118,11 +122,18 @@ public class QuizContentFrag extends Fragment implements MainActivity.OnBackPres
                     @Override
                     public void onClick(View v) {
                         customDialog.dismiss();
-                        setRemove();
-                        SimpleData.getInstance().expReflection();
+
+                        Map<String, Object> map = SimpleData.getInstance().expReflection();
+                        CommonController.getInstance().getGetCharacterVideoActivity(getContext(), map);
                         getFragmentManager().beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit(); //여기 결과창으로 변경
+
                     }
                 });
+                if(timeThread != null)
+                    timeThread.interrupt();
+
+
+                setRemove();
                 customDialog.show();
             }
         };
@@ -151,7 +162,6 @@ public class QuizContentFrag extends Fragment implements MainActivity.OnBackPres
         } else {
             contents.setTextSize(28);
 
-            contents.setPadding(120, 350, 120, 30);
             viewPager.setVisibility(View.GONE);
         }
 
@@ -253,13 +263,14 @@ public class QuizContentFrag extends Fragment implements MainActivity.OnBackPres
                                 public void onClick(View v) {
                                     customDialog.dismiss();
                                     viewPager.setAdapter(null);
-                                    SimpleData.getInstance().expReflection();
+                                    Map<String, Object> map = SimpleData.getInstance().expReflection();
+                                    CommonController.getInstance().getGetCharacterVideoActivity(getContext(), map);
+
                                     getFragmentManager().beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit(); //여기 결과창으로 변경
 
                                 }
                             });
-
-                            customDialog.show();
+                                customDialog.show();
                         }
                     },0);
                 } catch (InterruptedException e1) {

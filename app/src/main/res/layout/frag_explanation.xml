@@ -10,25 +10,32 @@
     <RelativeLayout
         android:id="@+id/fragExplanation_storyRelative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="15dp">
 
         <ImageView
             android:id="@+id/fragexplanation_speechBubbleIv"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:translationZ="-1dp"
             android:layout_alignParentTop="true"
             />
+
+
         <TextView
             android:id="@+id/fragExplanation_story"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginBottom="20dp"
             android:textColor="#000"
-            android:textSize="17sp"
-            android:fontFamily="@font/pfstardust"
-            android:layout_marginLeft="15dp"/>
+            android:textSize="16sp"
+            android:fontFamily="@font/pfstardust"/>
+
+
     </RelativeLayout>
 
 
@@ -36,14 +43,13 @@
         android:id="@+id/fragExplanation_lab_doctor"
         android:layout_below="@id/fragExplanation_storyRelative"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_marginTop="-15dp"/>
     <RelativeLayout
         android:layout_below="@id/fragExplanation_lab_doctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-
+        android:layout_marginBottom="70dp"
         android:paddingTop="50dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"

@@ -2,7 +2,6 @@ package com.example.giyeon.blizzard.user.view.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,43 +21,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.target.CustomViewTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.giyeon.blizzard.MainActivity;
 import com.example.giyeon.blizzard.R;
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.controller.NetworkController;
-import com.example.giyeon.blizzard.user.custom.CustomDialog;
 import com.example.giyeon.blizzard.user.custom.CustomGameoutDialog;
-import com.example.giyeon.blizzard.user.custom.OnSwipeTouchListener;
 import com.example.giyeon.blizzard.user.custom.TimerHandler;
 import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
-import com.example.giyeon.blizzard.user.view.ExplanationVideoActivity;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
-import com.google.android.exoplayer2.RenderersFactory;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 import java.util.Map;
+
 
 @SuppressLint("ValidFragment")
 public class QuizContentAudioFrag extends Fragment implements MainActivity.OnBackPressedListener{
@@ -150,10 +129,17 @@ public class QuizContentAudioFrag extends Fragment implements MainActivity.OnBac
                     public void onClick(View v) {
                         customDialog.dismiss();
                         setRemove();
-                        SimpleData.getInstance().expReflection();
+                        Map<String, Object> map = SimpleData.getInstance().expReflection();
+                        CommonController.getInstance().getGetCharacterVideoActivity(getContext(), map);
                         getFragmentManager().beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit(); //여기 결과창으로 변경
                     }
                 });
+
+                if(timeThread != null)
+                    timeThread.interrupt();
+
+
+                setRemove();
                 customDialog.show();
             }
         };
@@ -260,7 +246,8 @@ public class QuizContentAudioFrag extends Fragment implements MainActivity.OnBac
                                 public void onClick(View v) {
                                     customDialog.dismiss();
                                     setRemove();
-                                    SimpleData.getInstance().expReflection();
+                                    Map<String, Object> map = SimpleData.getInstance().expReflection();
+                                    CommonController.getInstance().getGetCharacterVideoActivity(getContext(), map);
                                     getFragmentManager().beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit(); //여기 결과창으로 변경
 
                                 }

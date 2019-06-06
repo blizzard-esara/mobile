@@ -30,12 +30,14 @@ import android.widget.Toast;
 
 import com.example.giyeon.blizzard.user.controller.CommonController;
 import com.example.giyeon.blizzard.user.custom.CustomDialog;
+import com.example.giyeon.blizzard.user.custom.CustomGameoutDialog;
 import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.dto.Explanation;
 import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
 import com.example.giyeon.blizzard.user.view.ExplanationImageActivity;
 import com.example.giyeon.blizzard.user.view.ExplanationVideoActivity;
+import com.example.giyeon.blizzard.user.view.GetCharacterActivity;
 import com.example.giyeon.blizzard.user.view.frag.ExplanationFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainQuizeFragment;
 import com.example.giyeon.blizzard.user.view.frag.MainEggManageFragment;
@@ -45,6 +47,7 @@ import com.example.giyeon.blizzard.user.view.frag.UserModifyFragment;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private OnBackPressedListener mBackListener;
+    private CustomGameoutDialog customGameoutDialog;
 
     public void setOnBackPressedListener(OnBackPressedListener listener) {
         mBackListener = listener;
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     LinearLayout navHeaderContainer;
 
     View navHeaderView;
-    CustomDialog customDialog;
+    //CustomDialog customDialog;
     ActionBarDrawerToggle toggle;
     
     /** Fragment Setting**/
@@ -136,8 +140,10 @@ public class MainActivity extends AppCompatActivity
                         SimpleData.getInstance().backPressedTime = 0;
                     } else {
                         super.onBackPressed();
+                        CommonController.getInstance().backgroundSound = null;
                         finish();
                         android.os.Process.killProcess(android.os.Process.myPid());
+
                     }
                 }
             }
@@ -230,7 +236,16 @@ public class MainActivity extends AppCompatActivity
                         public void run() {
 
                             if(nextquiz == -1) { //Result 창
-
+                                customGameoutDialog = new CustomGameoutDialog(context,R.drawable.out_finish, SimpleData.getInstance().getQuizExp(),new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        customGameoutDialog.dismiss();
+                                        Map<String, Object> map = SimpleData.getInstance().expReflection();
+                                        CommonController.getInstance().getGetCharacterVideoActivity(context, map);
+                                        manager.beginTransaction().replace(R.id.content_main, new MainEggManageFragment()).commit(); //여기 결과창으로 변경
+                                    }
+                                });
+                                customGameoutDialog.show();
                             } else {
                                 List<Quiz> quiz = CommonController.getInstance().getQuizList();
                                 for(int i = 0 ; i< quiz.size() ; i++) {

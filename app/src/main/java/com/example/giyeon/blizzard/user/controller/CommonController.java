@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -24,8 +25,11 @@ import com.example.giyeon.blizzard.user.custom.CustomTypefaceSpan;
 import com.example.giyeon.blizzard.user.custom.StoryHandler;
 import com.example.giyeon.blizzard.user.dto.Quiz;
 import com.example.giyeon.blizzard.user.dto.SimpleData;
+import com.example.giyeon.blizzard.user.view.GetCharacterActivity;
+import com.example.giyeon.blizzard.user.view.GetCharacterVideoActivity;
 
 import java.util.List;
+import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -173,5 +177,16 @@ public class CommonController {
     }
 
 
+
+    public void getGetCharacterVideoActivity(Context context, Map<String, Object> map) {
+        if(map.containsKey("monster_name")) {
+            Intent intent = new Intent(context, GetCharacterVideoActivity.class);
+            intent.putExtra("kind",map.get("egg").toString());
+            //Intent intent1 = new Intent(context, GetCharacterActivity.class);
+            intent.putExtra("monsterName",map.get("monster_name").toString());
+            intent.putExtra("monsterUrl",SimpleData.getInstance().getImageUrl()+map.get("url").toString());
+            context.startActivity(intent);
+        }
+    }
 
 }
